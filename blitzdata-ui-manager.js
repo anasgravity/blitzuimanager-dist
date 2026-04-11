@@ -55773,7 +55773,7 @@ class ZX {
 /**
  * Version of the library
  */
-Me(ZX, "VERSION", "1.0.63");
+Me(ZX, "VERSION", "1.0.64");
 export {
   si as BDComments,
   ZX as default
