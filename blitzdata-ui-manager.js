@@ -497,7 +497,7 @@ let xs = class {
         };
       if (i.conflict) {
         const s = Object.keys(e.transaction.data)[0], c = i.conflict[s];
-        if (!c)
+        if (c === void 0)
           throw new Error("No previous value found in conflict result!");
         return {
           status: Ze.Conflict,
@@ -1828,7 +1828,7 @@ Do you still want to perform your change to "${(t = a.transaction.data) == null 
           return d.transaction.action === ve.Edit && ((f = d.transaction.data) == null ? void 0 : f[n]) !== void 0;
         });
         let c = F.Pending, l;
-        const h = s.find((d) => d.status === F.Failed), u = s.find((d) => d.status === F.Conflict);
+        const h = s.find((d) => d.status === F.Failed), u = s.find((d) => d.status === F.Conflict && d.message !== void 0) ?? s.find((d) => d.status === F.Conflict);
         h ? (c = F.Failed, l = h) : u ? (c = F.Conflict, l = u) : s.every((d) => d.status === F.Completed) && (c = F.Completed), i._syncSignal.set({ status: c, job: l });
       }
   }
@@ -2482,7 +2482,7 @@ let Zd = gp, ua = class {
         return u.transaction.action === ve.Edit && ((d = u.transaction.data) == null ? void 0 : d[this._name]) !== void 0;
       });
       let s = F.Pending, c;
-      const l = i.find((u) => u.status === F.Failed), h = i.find((u) => u.status === F.Conflict);
+      const l = i.find((u) => u.status === F.Failed), h = i.find((u) => u.status === F.Conflict && u.message !== void 0) ?? i.find((u) => u.status === F.Conflict);
       l ? (s = F.Failed, c = l) : h ? (s = F.Conflict, c = h) : i.every((u) => u.status === F.Completed) && (s = F.Completed), this._syncSignal.set({ status: s, job: c }, !1), e(this._syncSignal.get());
     }), a;
   }
@@ -5024,7 +5024,7 @@ let Ib = class extends qe {
         return u.transaction.action === ve.Edit && ((d = u.transaction.data) == null ? void 0 : d[this._name]) !== void 0;
       });
       let s = F.Pending, c;
-      const l = i.find((u) => u.status === F.Failed), h = i.find((u) => u.status === F.Conflict);
+      const l = i.find((u) => u.status === F.Failed), h = i.find((u) => u.status === F.Conflict && u.message !== void 0) ?? i.find((u) => u.status === F.Conflict);
       l ? (s = F.Failed, c = l) : h ? (s = F.Conflict, c = h) : i.every((u) => u.status === F.Completed) && (s = F.Completed), this._syncSignal.set({ status: s, job: c }, !1), e(this._syncSignal.get());
     }), a;
   }
@@ -5505,7 +5505,7 @@ class Xb extends qe {
    * @param value Value to be casted.
    */
   unserialize(e) {
-    if (e !== null && typeof e == "object" && e.lat && e.lng)
+    if (e !== null && typeof e == "object")
       return e;
     if (e !== void 0)
       return null;
@@ -6906,7 +6906,7 @@ const Zt = class ft {
    * {@link https://semver.org/}
    */
   static get VERSION() {
-    return "1.4.18";
+    return "1.4.21";
   }
   /**
    * Initializes BlitzData with given options.
@@ -55805,7 +55805,7 @@ class eZ {
 /**
  * Version of the library
  */
-Me(eZ, "VERSION", "1.0.70");
+Me(eZ, "VERSION", "1.0.71");
 function tp(o) {
   return o.replace(/&/g, "&amp;").replace(/"/g, "&quot;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
 }
