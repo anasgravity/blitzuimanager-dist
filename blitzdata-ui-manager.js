@@ -46585,7 +46585,7 @@ function qJ(o) {
           if (r.style.color = "#a82e25", r.innerHTML = `
                     <p class="blitzicon" style="font-size: 1.1rem; margin: 0;">&#xe91d;</p>
                     <p style="margin: 0;">Syncing conflict</p>
-                `, a.job && a.job.message) {
+                `, a.job && a.job.message !== void 0) {
             const i = r.querySelector("p:nth-of-type(2)");
             i && (i.style.cursor = "pointer", i.style.zIndex = "100", i.onclick = () => {
               var s;
@@ -55805,7 +55805,7 @@ class eZ {
 /**
  * Version of the library
  */
-Me(eZ, "VERSION", "1.0.69");
+Me(eZ, "VERSION", "1.0.70");
 function tp(o) {
   return o.replace(/&/g, "&amp;").replace(/"/g, "&quot;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
 }
