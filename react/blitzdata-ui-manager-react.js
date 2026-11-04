@@ -1,11 +1,11 @@
-var Ct = Object.defineProperty;
-var Nt = (e, t, l) => t in e ? Ct(e, t, { enumerable: !0, configurable: !0, writable: !0, value: l }) : e[t] = l;
-var V = (e, t, l) => (Nt(e, typeof t != "symbol" ? t + "" : t, l), l);
-import { BDModel as At } from "@blitzdata.ts/core";
-import { jsx as r, jsxs as w, Fragment as Ue } from "react/jsx-runtime";
-import { useState as A, useRef as j, useEffect as L, useCallback as Z, useMemo as U, createContext as wt, useContext as St, Component as $t } from "react";
-const kt = (e) => e == null || e === "" || Array.isArray(e) && e.length === 0, Ot = (e) => Array.isArray(e) ? e[0] : e, Ce = (e, t) => e.endsWith("_fk") ? "fk" : e.endsWith("_mtm") ? "mtm" : Ot(t), Pe = ["view", "control", "filter", "editor", "default", "empty"];
-class Mt {
+var kt = Object.defineProperty;
+var Ot = (e, t, l) => t in e ? kt(e, t, { enumerable: !0, configurable: !0, writable: !0, value: l }) : e[t] = l;
+var V = (e, t, l) => (Ot(e, typeof t != "symbol" ? t + "" : t, l), l);
+import { BDModel as Mt } from "@blitzdata.ts/core";
+import { jsx as r, jsxs as A, Fragment as Ke } from "react/jsx-runtime";
+import { useState as w, useRef as _, useEffect as L, useCallback as Z, useMemo as R, createContext as Et, useContext as Tt, Component as Lt } from "react";
+const Ft = (e) => e == null || e === "" || Array.isArray(e) && e.length === 0, It = (e) => Array.isArray(e) ? e[0] : e, Ae = (e, t) => e.endsWith("_fk") ? "fk" : e.endsWith("_mtm") ? "mtm" : It(t), Ge = ["view", "control", "filter", "editor", "default", "empty"];
+class Dt {
   constructor(t) {
     V(this, "builtins", /* @__PURE__ */ new Map());
     V(this, "typeOverlays", /* @__PURE__ */ new Map());
@@ -63,37 +63,37 @@ class Mt {
         delete l.view;
   }
   resolve(t, l) {
-    const { type: n, many: i, model: s, name: c, hint: d, use: u, maxLayer: f = 8 } = t, o = { defaultConfig: {}, sources: {} }, a = (b, v, N) => {
-      if (!(!b || v > f)) {
-        for (const O of Pe) {
-          const S = b[O];
-          S !== void 0 && (o[O] = S, o.sources[O] = { layer: v, label: N });
+    const { type: n, many: i, model: s, name: a, hint: o, use: d, maxLayer: u = 8 } = t, f = { defaultConfig: {}, sources: {} }, c = (h, v, N) => {
+      if (!(!h || v > u)) {
+        for (const O of Ge) {
+          const S = h[O];
+          S !== void 0 && (f[O] = S, f.sources[O] = { layer: v, label: N });
         }
-        b.defaultConfig && Object.assign(o.defaultConfig, b.defaultConfig);
+        h.defaultConfig && Object.assign(f.defaultConfig, h.defaultConfig);
       }
-    }, h = (b, v, N) => {
-      const O = this.presets.get(b);
+    }, b = (h, v, N) => {
+      const O = this.presets.get(h);
       if (O) {
         const { extends: $, ...T } = O;
-        return $ && a({ ...this.builtins.get($), ...this.typeOverlays.get($) }, v, `${N} (extends '${$}')`), a(T, v + 1, N), !0;
+        return $ && c({ ...this.builtins.get($), ...this.typeOverlays.get($) }, v, `${N} (extends '${$}')`), c(T, v + 1, N), !0;
       }
-      const S = { ...this.builtins.get(b), ...this.typeOverlays.get(b) };
-      return Object.keys(S).length ? (a(S, v + 1, N), !0) : !1;
+      const S = { ...this.builtins.get(h), ...this.typeOverlays.get(h) };
+      return Object.keys(S).length ? (c(S, v + 1, N), !0) : !1;
     };
-    a(this.builtins.get(n), 0, "built-in"), i && a(this.builtins.get(`${n}[]`), 0, "built-in (many)"), a(this.typeOverlays.get(n), 1, "defineUI"), i && a(this.typeOverlays.get(`${n}[]`), 1, "defineUI (many)");
+    c(this.builtins.get(n), 0, "built-in"), i && c(this.builtins.get(`${n}[]`), 0, "built-in (many)"), c(this.typeOverlays.get(n), 1, "defineUI"), i && c(this.typeOverlays.get(`${n}[]`), 1, "defineUI (many)");
     const m = i ? void 0 : this.bindings.get(n);
-    if (m && !h(m.preset, 2, m.label ?? `binding '${m.preset}'`) && this.warn(`type '${n}' is bound to '${m.preset}' — not registered, using '${n}' default`), d && !h(d, 4, `preset '${d}'`) && this.warn(`${s ?? "?"}.${c ?? "?"} requests ui '${d}' — not registered, using '${n}' default`), s && c && a(this.attrOverlays.get(`${s}.${c}`), 6, "defineUIFor"), u && (typeof u == "string" ? h(u, 7, `use '${u}'`) || this.warn(`mount requests ui '${u}' — not registered, using '${n}' default`) : typeof u == "function" ? a({ control: u }, 8, "use (control)") : a(u, 8, "use (module)")), l) {
-      const b = Pe.filter((v) => o.sources[v]).map((v) => `${v} from ${o.sources[v].label}`);
-      l(`${s ?? "?"}.${c ?? n} → ${b.join("; ") || "nothing registered"}`);
+    if (m && !b(m.preset, 2, m.label ?? `binding '${m.preset}'`) && this.warn(`type '${n}' is bound to '${m.preset}' — not registered, using '${n}' default`), o && !b(o, 4, `preset '${o}'`) && this.warn(`${s ?? "?"}.${a ?? "?"} requests ui '${o}' — not registered, using '${n}' default`), s && a && c(this.attrOverlays.get(`${s}.${a}`), 6, "defineUIFor"), d && (typeof d == "string" ? b(d, 7, `use '${d}'`) || this.warn(`mount requests ui '${d}' — not registered, using '${n}' default`) : typeof d == "function" ? c({ control: d }, 8, "use (control)") : c(d, 8, "use (module)")), l) {
+      const h = Ge.filter((v) => f.sources[v]).map((v) => `${v} from ${f.sources[v].label}`);
+      l(`${s ?? "?"}.${a ?? n} → ${h.join("; ") || "nothing registered"}`);
     }
-    return o;
+    return f;
   }
   mapEntry(t, l) {
     let n = t.get(l);
     return n || (n = {}, t.set(l, n)), n;
   }
 }
-class Et {
+class xt {
   constructor() {
     V(this, "typeConfig", {});
     V(this, "attributeConfig", {});
@@ -117,89 +117,7 @@ class Et {
     };
   }
 }
-function Tt(e, t) {
-  var i, s, c, d, u, f, o;
-  const l = ((d = (c = (s = (i = e._object) == null ? void 0 : i.model) == null ? void 0 : s.getAttributesDetails) == null ? void 0 : c.call(s)) == null ? void 0 : d[e._name]) ?? {}, n = l.type ?? e._type;
-  return {
-    kind: "live",
-    type: Ce(e._name, n),
-    many: Array.isArray(l.type) && !e._name.endsWith("_mtm"),
-    model: (o = (f = (u = e._object) == null ? void 0 : u.model) == null ? void 0 : f.getName) == null ? void 0 : o.call(f),
-    name: e._name,
-    attribute: e,
-    value: e.value,
-    set: (a) => e.edit(a),
-    add: (a) => {
-      var h;
-      return (h = e.add) == null ? void 0 : h.call(e, a);
-    },
-    remove: (a) => {
-      var h;
-      return (h = e.remove) == null ? void 0 : h.call(e, a);
-    },
-    // VALUE stream: the object's remoteChange event — patch in place
-    subscribe: (a) => {
-      const h = e._object;
-      if (typeof (h == null ? void 0 : h.addEventListener) != "function")
-        return () => {
-        };
-      const m = (b) => {
-        b && !Object.hasOwn(b, e._name) || a(e.value);
-      };
-      return h.addEventListener("remoteChange", m), () => h.removeEventListener("remoteChange", m);
-    },
-    // SAVE-STATE stream: pending | saved | failed — distinct from value
-    status: (a) => {
-      var h;
-      return ((h = e.syncStatus) == null ? void 0 : h.call(e, a)) ?? (() => {
-      });
-    },
-    attributeDetails: l,
-    hint: l.ui ?? l.editor,
-    mountConfig: t
-  };
-}
-function Lt(e, t, l, n, i) {
-  var s;
-  return {
-    kind: "draft",
-    type: Ce(t, l.type),
-    many: Array.isArray(l.type) && !t.endsWith("_mtm"),
-    model: (s = n == null ? void 0 : n.getName) == null ? void 0 : s.call(n),
-    name: t,
-    value: e[t],
-    set: (c) => {
-      e[t] = c;
-    },
-    add: (c) => {
-      (e[t] ?? (e[t] = [])).push(c);
-    },
-    remove: (c) => {
-      e[t] = (e[t] ?? []).filter((d) => d !== c);
-    },
-    attributeDetails: l,
-    hint: l.ui ?? l.editor,
-    mountConfig: i
-  };
-}
-function Qe(e, t, l, n, i, s) {
-  var c;
-  return {
-    kind: "query",
-    type: Ce(t, l.type),
-    many: Array.isArray(l.type) && !t.endsWith("_mtm"),
-    model: (c = n == null ? void 0 : n.getName) == null ? void 0 : c.call(n),
-    name: t,
-    value: e[t],
-    set: (d) => {
-      d ? e[t] = d : delete e[t], i == null || i();
-    },
-    attributeDetails: l,
-    hint: l.ui ?? l.editor,
-    mountConfig: s
-  };
-}
-function X(e, t, l, n) {
+function q(e, t, l, n) {
   if (typeof (e == null ? void 0 : e[l]) == "string")
     return e[l];
   if (typeof t == "string")
@@ -210,22 +128,30 @@ function X(e, t, l, n) {
       return i[l];
     if (typeof i.default == "string")
       return i.default;
-    const s = Object.values(i).find((c) => typeof c == "string");
+    const s = Object.values(i).find((a) => typeof a == "string");
     if (s)
       return s;
   }
   return n;
 }
-function Ft(e) {
+function jt(e, t, l, n) {
+  const i = e, s = i && typeof i == "object" ? i[t] : void 0;
+  return s == null ? n : q(void 0, s, l, n);
+}
+function _t(e, t) {
+  var l, n, i;
+  return ((n = (l = e == null ? void 0 : e.getAttributesDetails) == null ? void 0 : l.call(e)) == null ? void 0 : n[t]) ?? ((i = e == null ? void 0 : e.getUserAttributeDetails) == null ? void 0 : i.call(e, t)) ?? {};
+}
+function Ut(e) {
   return e !== null && typeof e == "object" && Object.hasOwn(e, "_value") ? e.value : e;
 }
-function Ne(e) {
-  return Array.isArray(e) ? e.map((t) => Ft(t)) : [];
+function Se(e) {
+  return Array.isArray(e) ? e.map((t) => Ut(t)) : [];
 }
-function Ae(e) {
+function $e(e) {
   return e.replace(/(\^|\$|\\|\/|\||\*|\+|\-|\.|\?|\(|\)|\[|\]|\{|\})/g, "\\$&");
 }
-function It(e) {
+function Vt(e) {
   return new Promise((t, l) => {
     if (window.google && window.google.maps) {
       t();
@@ -235,8 +161,8 @@ function It(e) {
     n.src = `https://maps.googleapis.com/maps/api/js?key=${e}&libraries=places`, n.async = !0, n.defer = !0, n.onload = () => t(), n.onerror = () => l(new Error("Failed to load Google Maps API")), document.head.appendChild(n);
   });
 }
-async function Dt(e, t, l) {
-  if (await It(l), !window.google || !window.google.maps)
+async function Bt(e, t, l) {
+  if (await Vt(l), !window.google || !window.google.maps)
     return null;
   const n = { lat: parseFloat(e), lng: parseFloat(t) };
   if (!Number.isFinite(n.lat) || !Number.isFinite(n.lng))
@@ -247,22 +173,104 @@ async function Dt(e, t, l) {
   return new google.maps.Marker({ map: s, position: n }), i;
 }
 new Function("url", "return import(url)");
-function Xe(e) {
+function Rt(e, t) {
+  var i, s, a, o;
+  const l = _t((i = e._object) == null ? void 0 : i.model, e._name), n = l.type ?? e._type;
+  return {
+    kind: "live",
+    type: Ae(e._name, n),
+    many: Array.isArray(l.type) && !e._name.endsWith("_mtm"),
+    model: (o = (a = (s = e._object) == null ? void 0 : s.model) == null ? void 0 : a.getName) == null ? void 0 : o.call(a),
+    name: e._name,
+    attribute: e,
+    value: e.value,
+    set: (d) => e.edit(d),
+    add: (d) => {
+      var u;
+      return (u = e.add) == null ? void 0 : u.call(e, d);
+    },
+    remove: (d) => {
+      var u;
+      return (u = e.remove) == null ? void 0 : u.call(e, d);
+    },
+    // VALUE stream: the object's remoteChange event — patch in place
+    subscribe: (d) => {
+      const u = e._object;
+      if (typeof (u == null ? void 0 : u.addEventListener) != "function")
+        return () => {
+        };
+      const f = (c) => {
+        c && !Object.hasOwn(c, e._name) || d(e.value);
+      };
+      return u.addEventListener("remoteChange", f), () => u.removeEventListener("remoteChange", f);
+    },
+    // SAVE-STATE stream: pending | saved | failed — distinct from value
+    status: (d) => {
+      var u;
+      return ((u = e.syncStatus) == null ? void 0 : u.call(e, d)) ?? (() => {
+      });
+    },
+    attributeDetails: l,
+    hint: l.ui ?? l.editor,
+    mountConfig: t
+  };
+}
+function Pt(e, t, l, n, i) {
+  var s;
+  return {
+    kind: "draft",
+    type: Ae(t, l.type),
+    many: Array.isArray(l.type) && !t.endsWith("_mtm"),
+    model: (s = n == null ? void 0 : n.getName) == null ? void 0 : s.call(n),
+    name: t,
+    value: e[t],
+    set: (a) => {
+      e[t] = a;
+    },
+    add: (a) => {
+      (e[t] ?? (e[t] = [])).push(a);
+    },
+    remove: (a) => {
+      e[t] = (e[t] ?? []).filter((o) => o !== a);
+    },
+    attributeDetails: l,
+    hint: l.ui ?? l.editor,
+    mountConfig: i
+  };
+}
+function it(e, t, l, n, i, s) {
+  var a;
+  return {
+    kind: "query",
+    type: Ae(t, l.type),
+    many: Array.isArray(l.type) && !t.endsWith("_mtm"),
+    model: (a = n == null ? void 0 : n.getName) == null ? void 0 : a.call(n),
+    name: t,
+    value: e[t],
+    set: (o) => {
+      o ? e[t] = o : delete e[t], i == null || i();
+    },
+    attributeDetails: l,
+    hint: l.ui ?? l.editor,
+    mountConfig: s
+  };
+}
+function st(e) {
   const t = Object.keys(e);
   return t.length === 0 ? null : (l) => t.every((n) => {
     var i;
-    return xt((i = l[n]) == null ? void 0 : i.value, e[n]);
+    return zt((i = l[n]) == null ? void 0 : i.value, e[n]);
   });
 }
-const Ke = (e) => e.map(
+const We = (e) => e.map(
   (t) => t && Object.hasOwn(t, "_value") ? t.value : t && Object.hasOwn(t, "_blitzID") ? t._blitzID : t
 );
-function xt(e, t) {
+function zt(e, t) {
   switch (t.op) {
     case "contains":
-      return typeof e == "string" && !!e.match(new RegExp(Ae(String(t.value)), "i"));
+      return typeof e == "string" && !!e.match(new RegExp($e(String(t.value)), "i"));
     case "eq":
-      return Array.isArray(e) ? Ke(e).includes(t.value) : e == t.value;
+      return Array.isArray(e) ? We(e).includes(t.value) : e == t.value;
     case "between": {
       const l = typeof e == "string" && Number.isNaN(Number(e)) ? new Date(e).getTime() : Number(e);
       if (e == null || Number.isNaN(l))
@@ -275,7 +283,7 @@ function xt(e, t) {
       if (!Array.isArray(l) || l.length === 0)
         return !0;
       if (Array.isArray(e)) {
-        const n = Ke(e);
+        const n = We(e);
         return l.some((i) => n.includes(i));
       }
       return l.includes(e);
@@ -284,16 +292,16 @@ function xt(e, t) {
       return !0;
   }
 }
-const et = /* @__PURE__ */ new Set(["varchar", "text", "markdown", "email", "url", "tag", "hex", "formula", "youtube"]), ae = (e) => {
+const at = /* @__PURE__ */ new Set(["varchar", "text", "markdown", "email", "url", "tag", "hex", "formula", "youtube"]), ae = (e) => {
   const t = {};
   return e.View !== void 0 && (t.view = e.View), e.Control !== void 0 && (t.control = e.Control), e.Filter !== void 0 && (t.filter = e.Filter), e.default !== void 0 && (t.default = e.default), e.empty !== void 0 && (t.empty = e.empty), e.defaultConfig !== void 0 && (t.defaultConfig = e.defaultConfig), t;
 };
-class _t {
+class Kt {
   constructor() {
-    V(this, "registry", new Mt((t) => this.warn(t)));
-    V(this, "config", new Et());
+    V(this, "registry", new Dt((t) => this.warn(t)));
+    V(this, "config", new xt());
     V(this, "debug", !1);
-    V(this, "resolveModel", (t) => At.get(t));
+    V(this, "resolveModel", (t) => Mt.get(t));
   }
   /** Register a built-in datatype module (the floor layer). */
   register(t) {
@@ -332,13 +340,13 @@ class _t {
     console.warn(`[BlitzUIManagerReact] ${t}`);
   }
 }
-const tt = new _t();
-function B(e) {
-  const [t, l] = A(e.value), n = j(e.value);
+const rt = new Kt();
+function U(e) {
+  const [t, l] = w(e.value), n = _(e.value);
   e.value !== n.current && (n.current = e.value, l(e.value)), L(() => {
     var s;
-    return (s = e.subscribe) == null ? void 0 : s.call(e, (c) => {
-      n.current = c, l(c);
+    return (s = e.subscribe) == null ? void 0 : s.call(e, (a) => {
+      n.current = a, l(a);
     });
   }, [e.subscribe]);
   const i = Z((s) => {
@@ -346,57 +354,57 @@ function B(e) {
   }, [e.onChange]);
   return [t, i];
 }
-function jt(e) {
-  const [t, l] = A(null);
+function Gt(e) {
+  const [t, l] = w(null);
   return L(() => {
     var n;
     return (n = e.status) == null ? void 0 : n.call(e, l);
   }, [e.status]), t;
 }
 function ee(e) {
-  const { value: t, commit: l, validate: n, delay: i = 500, flushOnUnmount: s = !0 } = e, [c, d] = A(t), u = j(t), f = j(null), o = j(c);
-  o.current = c;
-  const a = j(t);
-  t !== a.current && (a.current = t, u.current = t, f.current === null && d(t));
-  const h = () => {
-    f.current !== null && (clearTimeout(f.current), f.current = null);
+  const { value: t, commit: l, validate: n, delay: i = 500, flushOnUnmount: s = !0 } = e, [a, o] = w(t), d = _(t), u = _(null), f = _(a);
+  f.current = a;
+  const c = _(t);
+  t !== c.current && (c.current = t, d.current = t, u.current === null && o(t));
+  const b = () => {
+    u.current !== null && (clearTimeout(u.current), u.current = null);
   }, m = Z((S) => {
-    h(), !(n && !n(S)) && S !== u.current && (u.current = S, l(S));
-  }, [l, n]), b = Z((S) => {
-    d(S), o.current = S, h(), f.current = setTimeout(() => {
-      f.current = null, m(S);
+    b(), !(n && !n(S)) && S !== d.current && (d.current = S, l(S));
+  }, [l, n]), h = Z((S) => {
+    o(S), f.current = S, b(), u.current = setTimeout(() => {
+      u.current = null, m(S);
     }, i);
-  }, [m, i]), v = Z(() => m(o.current), [m]), N = Z(() => {
-    h(), d(u.current), o.current = u.current;
-  }, []), O = j(v);
+  }, [m, i]), v = Z(() => m(f.current), [m]), N = Z(() => {
+    b(), o(d.current), f.current = d.current;
+  }, []), O = _(v);
   return O.current = s ? v : () => {
-  }, L(() => () => O.current(), []), { draft: c, setDraft: b, flush: v, cancel: N };
+  }, L(() => () => O.current(), []), { draft: a, setDraft: h, flush: v, cancel: N };
 }
 const P = ({ status: e }) => {
-  var d;
-  const t = jt({ status: e }), l = j(!1), [n, i] = A(!1), s = t == null ? void 0 : t.status;
+  var o;
+  const t = Gt({ status: e }), l = _(!1), [n, i] = w(!1), s = t == null ? void 0 : t.status;
   if (L(() => {
     if (s && !(s === "completed" && !l.current) && (l.current = !0, i(!0), s === "completed")) {
-      const u = setTimeout(() => i(!1), 1e3);
-      return () => clearTimeout(u);
+      const d = setTimeout(() => i(!1), 1e3);
+      return () => clearTimeout(d);
     }
   }, [t]), !n || !s || s === "completed" && !l.current)
     return null;
-  const c = (d = t == null ? void 0 : t.job) == null ? void 0 : d.message;
+  const a = (o = t == null ? void 0 : t.job) == null ? void 0 : o.message;
   return /* @__PURE__ */ r(
     "span",
     {
       className: `bd-savestate bd-savestate-${s}`,
       title: s === "conflict" ? "Conflict" : s,
-      onClick: c ? (u) => {
-        u.stopPropagation(), alert(c);
+      onClick: a ? (d) => {
+        d.stopPropagation(), alert(a);
       } : void 0,
       children: s === "pending" ? "…" : s === "completed" ? "✓" : "✗"
     }
   );
-}, Bt = (e) => {
-  const t = e.value, [l, n] = A(t == null ? "" : String(t.value));
-  return /* @__PURE__ */ w(
+}, Wt = (e) => {
+  const t = e.value, [l, n] = w(t == null ? "" : String(t.value));
+  return /* @__PURE__ */ A(
     "select",
     {
       className: "bd-filter bd-filter-boolean",
@@ -413,28 +421,28 @@ const P = ({ status: e }) => {
     }
   );
 }, ce = (e) => {
-  const t = e.value, [l, n] = A((t == null ? void 0 : t.min) == null ? "" : String(t.min)), [i, s] = A((t == null ? void 0 : t.max) == null ? "" : String(t.max)), c = j(null), d = (u, f) => {
-    c.current && clearTimeout(c.current), c.current = setTimeout(() => {
-      if (u === "" && f === "") {
+  const t = e.value, [l, n] = w((t == null ? void 0 : t.min) == null ? "" : String(t.min)), [i, s] = w((t == null ? void 0 : t.max) == null ? "" : String(t.max)), a = _(null), o = (d, u) => {
+    a.current && clearTimeout(a.current), a.current = setTimeout(() => {
+      if (d === "" && u === "") {
         e.onChange(null);
         return;
       }
       e.onChange({
         op: "between",
-        min: u === "" ? null : Number(u),
-        max: f === "" ? null : Number(f)
+        min: d === "" ? null : Number(d),
+        max: u === "" ? null : Number(u)
       });
     }, 500);
   };
-  return /* @__PURE__ */ w("span", { className: "bd-filter bd-filter-range", children: [
+  return /* @__PURE__ */ A("span", { className: "bd-filter bd-filter-range", children: [
     /* @__PURE__ */ r(
       "input",
       {
         type: "number",
         placeholder: "min",
         value: l,
-        onChange: (u) => {
-          n(u.target.value), d(u.target.value, i);
+        onChange: (d) => {
+          n(d.target.value), o(d.target.value, i);
         }
       }
     ),
@@ -444,15 +452,15 @@ const P = ({ status: e }) => {
         type: "number",
         placeholder: "max",
         value: i,
-        onChange: (u) => {
-          s(u.target.value), d(l, u.target.value);
+        onChange: (d) => {
+          s(d.target.value), o(l, d.target.value);
         }
       }
     )
   ] });
-}, pe = (e) => e === !0 || e === 1 || e === "1", Vt = (e) => {
-  const [t, l] = B(e), n = pe(t);
-  return /* @__PURE__ */ w("span", { className: "bd-input bd-input-boolean", children: [
+}, Ne = (e) => e === !0 || e === 1 || e === "1", Zt = (e) => {
+  const [t, l] = U(e), n = Ne(t);
+  return /* @__PURE__ */ A("span", { className: "bd-input bd-input-boolean", children: [
     /* @__PURE__ */ r(
       "button",
       {
@@ -469,58 +477,58 @@ const P = ({ status: e }) => {
     ),
     /* @__PURE__ */ r(P, { status: e.status })
   ] });
-}, Rt = {
+}, Ht = {
   type: "boolean",
   default: () => !1,
   empty: (e) => e == null,
-  Control: Vt,
-  Filter: Bt,
-  View: ({ value: e }) => /* @__PURE__ */ r("span", { className: `bd-boolean ${pe(e) ? "icon-true" : "icon-false"}`, children: pe(e) ? "✓" : "✗" })
+  Control: Zt,
+  Filter: Wt,
+  View: ({ value: e }) => /* @__PURE__ */ r("span", { className: `bd-boolean ${Ne(e) ? "icon-true" : "icon-false"}`, children: Ne(e) ? "✓" : "✗" })
 };
 function oe(e = {}) {
   const { type: t = "text", pattern: l, serialize: n = (s) => s } = e;
   return (s) => {
-    const [c, d] = B(s), [u, f] = A(!1), o = s.config.errorMsg ?? e.errorMsg, a = s.config.pattern ?? l, { draft: h, setDraft: m, flush: b, cancel: v } = ee({
-      value: c == null ? "" : String(c),
-      commit: (N) => d(n(N)),
+    const [a, o] = U(s), [d, u] = w(!1), f = s.config.errorMsg ?? e.errorMsg, c = s.config.pattern ?? l, { draft: b, setDraft: m, flush: h, cancel: v } = ee({
+      value: a == null ? "" : String(a),
+      commit: (N) => o(n(N)),
       validate: (N) => {
-        const O = N === "" || !a || a.test(N);
-        return f(!O), O;
+        const O = N === "" || !c || c.test(N);
+        return u(!O), O;
       }
     });
-    return /* @__PURE__ */ w("span", { className: "bd-input bd-input-text", children: [
+    return /* @__PURE__ */ A("span", { className: "bd-input bd-input-text", children: [
       /* @__PURE__ */ r(
         "input",
         {
           type: t,
-          value: h,
+          value: b,
           placeholder: s.config.placeholder,
           onChange: (N) => m(N.target.value),
-          onBlur: b,
+          onBlur: h,
           onKeyDown: (N) => {
-            N.key === "Enter" && b(), N.key === "Escape" && (v(), N.target.blur());
+            N.key === "Enter" && h(), N.key === "Escape" && (v(), N.target.blur());
           }
         }
       ),
       /* @__PURE__ */ r(P, { status: s.status }),
-      u && o ? /* @__PURE__ */ r("span", { className: "bd-input-error", children: o }) : null
+      d && f ? /* @__PURE__ */ r("span", { className: "bd-input-error", children: f }) : null
     ] });
   };
 }
-const z = (e) => (Array.isArray(e) ? e.length > 0 : e !== "" && e != null) ? e : null, nt = (e) => Array.isArray(e) ? Ne(e).map(String).join(", ") : String(e ?? ""), de = ({ value: e }) => /* @__PURE__ */ r("p", { className: "bd-text", children: nt(e) });
-function lt(e, t, l) {
+const K = (e) => (Array.isArray(e) ? e.length > 0 : e !== "" && e != null) ? e : null, ct = (e) => Array.isArray(e) ? Se(e).map(String).join(", ") : String(e ?? ""), de = ({ value: e }) => /* @__PURE__ */ r("p", { className: "bd-text", children: ct(e) });
+function ot(e, t, l) {
   if (e.add && e.remove) {
     for (const n of l.filter((i) => !t.includes(i)))
       e.add(n);
     for (const n of t.filter((i) => !l.includes(i)))
       e.remove(n);
   } else
-    e.onChange(z(l));
+    e.onChange(K(l));
 }
-function we(e) {
-  return Array.isArray(e) ? e.map((t) => String(ze(t))) : e == null || e === "" ? [] : [String(ze(e))];
+function ke(e) {
+  return Array.isArray(e) ? e.map((t) => String(Ze(t))) : e == null || e === "" ? [] : [String(Ze(e))];
 }
-const ze = (e) => {
+const Ze = (e) => {
   var t;
   if (e !== null && typeof e == "object") {
     if (Object.hasOwn(e, "_blitzID"))
@@ -529,129 +537,129 @@ const ze = (e) => {
       return e.value;
   }
   return e;
-}, Ut = {
+}, Jt = {
   type: ["varchar", "tag", "formula"],
   empty: (e) => !e,
-  Control: oe({ serialize: z }),
+  Control: oe({ serialize: K }),
   View: de
-}, Pt = {
+}, qt = {
   type: "hex",
   empty: (e) => !e,
   defaultConfig: { pattern: /^[0-9a-fA-F]*$/, errorMsg: "Hex digits only (0-9, a-f)!" },
-  Control: oe({ serialize: z }),
+  Control: oe({ serialize: K }),
   View: de
-}, Kt = {
+}, Yt = {
   "&": "&amp;",
   "<": "&lt;",
   ">": "&gt;",
   '"': "&quot;",
   "'": "&#39;"
 };
-function it(e) {
-  return String(e ?? "").replace(/[&<>"']/g, (t) => Kt[t]);
+function dt(e) {
+  return String(e ?? "").replace(/[&<>"']/g, (t) => Yt[t]);
 }
-const zt = /^\s*(javascript|data|vbscript):/i;
+const Xt = /^\s*(javascript|data|vbscript):/i;
 function ue(e) {
   const t = String(e ?? "");
-  return zt.test(t) ? "#" : it(t);
+  return Xt.test(t) ? "#" : dt(t);
 }
-const Gt = /^\s*(javascript|data|vbscript):/i, Wt = /^\|?\s*:?-+:?\s*(\|\s*:?-+:?\s*)*\|?$/, Ge = (e) => {
+const Qt = /^\s*(javascript|data|vbscript):/i, en = /^\|?\s*:?-+:?\s*(\|\s*:?-+:?\s*)*\|?$/, He = (e) => {
   let t = e.trim();
   return t.startsWith("|") && (t = t.slice(1)), t.endsWith("|") && (t = t.slice(0, -1)), t.split("|").map((l) => l.trim());
-}, We = (e) => Gt.test(e) ? "#" : e;
-function Y(e) {
-  return e.replace(/`([^`]+)`/g, "<code>$1</code>").replace(/!\[([^\]]*)\]\(([^)\s]+)\)/g, (t, l, n) => `<img alt="${l}" src="${We(n)}" />`).replace(/\[([^\]]+)\]\(([^)\s]+)\)/g, (t, l, n) => `<a href="${We(n)}">${l}</a>`).replace(/\*\*([^*]+)\*\*/g, "<strong>$1</strong>").replace(/\*([^*]+)\*/g, "<em>$1</em>");
+}, Je = (e) => Qt.test(e) ? "#" : e;
+function X(e) {
+  return e.replace(/`([^`]+)`/g, "<code>$1</code>").replace(/!\[([^\]]*)\]\(([^)\s]+)\)/g, (t, l, n) => `<img alt="${l}" src="${Je(n)}" />`).replace(/\[([^\]]+)\]\(([^)\s]+)\)/g, (t, l, n) => `<a href="${Je(n)}">${l}</a>`).replace(/\*\*([^*]+)\*\*/g, "<strong>$1</strong>").replace(/\*([^*]+)\*/g, "<em>$1</em>");
 }
-function Zt(e) {
-  const t = it(e.replace(/\r\n?/g, `
+function tn(e) {
+  const t = dt(e.replace(/\r\n?/g, `
 `)).split(`
 `), l = [];
-  let n = [], i = null, s = [], c = null, d = null;
-  const u = () => {
-    n.length && l.push(`<p>${n.map(Y).join("<br />")}</p>`), n = [];
+  let n = [], i = null, s = [], a = null, o = null;
+  const d = () => {
+    n.length && l.push(`<p>${n.map(X).join("<br />")}</p>`), n = [];
+  }, u = () => {
+    i && l.push(`<${i.tag}>${i.items.map((m) => `<li>${X(m)}</li>`).join("")}</${i.tag}>`), i = null;
   }, f = () => {
-    i && l.push(`<${i.tag}>${i.items.map((m) => `<li>${Y(m)}</li>`).join("")}</${i.tag}>`), i = null;
-  }, o = () => {
-    s.length && l.push(`<blockquote>${s.map(Y).join("<br />")}</blockquote>`), s = [];
-  }, a = () => {
-    if (d) {
-      const m = `<tr>${d.header.map((v) => `<th>${Y(v)}</th>`).join("")}</tr>`, b = d.rows.map((v) => `<tr>${v.map((N) => `<td>${Y(N)}</td>`).join("")}</tr>`).join("");
-      l.push(`<table><thead>${m}</thead><tbody>${b}</tbody></table>`);
+    s.length && l.push(`<blockquote>${s.map(X).join("<br />")}</blockquote>`), s = [];
+  }, c = () => {
+    if (o) {
+      const m = `<tr>${o.header.map((v) => `<th>${X(v)}</th>`).join("")}</tr>`, h = o.rows.map((v) => `<tr>${v.map((N) => `<td>${X(N)}</td>`).join("")}</tr>`).join("");
+      l.push(`<table><thead>${m}</thead><tbody>${h}</tbody></table>`);
     }
-    d = null;
-  }, h = () => {
-    u(), f(), o(), a();
+    o = null;
+  }, b = () => {
+    d(), u(), f(), c();
   };
   for (let m = 0; m < t.length; m++) {
-    const b = t[m];
-    if (c) {
-      /^```/.test(b) ? (l.push(`<pre><code>${c.join(`
-`)}</code></pre>`), c = null) : c.push(b);
+    const h = t[m];
+    if (a) {
+      /^```/.test(h) ? (l.push(`<pre><code>${a.join(`
+`)}</code></pre>`), a = null) : a.push(h);
       continue;
     }
-    if (/^```/.test(b)) {
-      h(), c = [];
+    if (/^```/.test(h)) {
+      b(), a = [];
       continue;
     }
-    if (d) {
-      if (b.trim() !== "" && b.includes("|")) {
-        d.rows.push(Ge(b));
+    if (o) {
+      if (h.trim() !== "" && h.includes("|")) {
+        o.rows.push(He(h));
         continue;
       }
-      a();
+      c();
     }
-    const v = b.match(/^(#{1,6})\s+(.*)$/);
+    const v = h.match(/^(#{1,6})\s+(.*)$/);
     if (v) {
-      h(), l.push(`<h${v[1].length}>${Y(v[2])}</h${v[1].length}>`);
+      b(), l.push(`<h${v[1].length}>${X(v[2])}</h${v[1].length}>`);
       continue;
     }
-    if (/^\s*(-{3,}|\*{3,})\s*$/.test(b)) {
-      h(), l.push("<hr />");
+    if (/^\s*(-{3,}|\*{3,})\s*$/.test(h)) {
+      b(), l.push("<hr />");
       continue;
     }
-    const N = b.match(/^&gt;\s?(.*)$/);
+    const N = h.match(/^&gt;\s?(.*)$/);
     if (N) {
-      u(), f(), s.push(N[1]);
+      d(), u(), s.push(N[1]);
       continue;
     }
-    const O = b.match(/^\s*[-*]\s+(.*)$/), S = b.match(/^\s*\d+\.\s+(.*)$/);
+    const O = h.match(/^\s*[-*]\s+(.*)$/), S = h.match(/^\s*\d+\.\s+(.*)$/);
     if (O || S) {
-      u(), o();
+      d(), f();
       const $ = O ? "ul" : "ol";
-      (!i || i.tag !== $) && (f(), i = { tag: $, items: [] }), i.items.push((O ?? S)[1]);
+      (!i || i.tag !== $) && (u(), i = { tag: $, items: [] }), i.items.push((O ?? S)[1]);
       continue;
     }
-    if (b.includes("|") && m + 1 < t.length && Wt.test(t[m + 1])) {
-      h(), d = { header: Ge(b), rows: [] }, m++;
+    if (h.includes("|") && m + 1 < t.length && en.test(t[m + 1])) {
+      b(), o = { header: He(h), rows: [] }, m++;
       continue;
     }
-    if (b.trim() === "") {
-      h();
+    if (h.trim() === "") {
+      b();
       continue;
     }
-    f(), o(), n.push(b);
+    u(), f(), n.push(h);
   }
-  return c && l.push(`<pre><code>${c.join(`
-`)}</code></pre>`), h(), l.join(`
+  return a && l.push(`<pre><code>${a.join(`
+`)}</code></pre>`), b(), l.join(`
 `);
 }
 function fe(e, t) {
   return (n) => {
-    const [i, s] = B(n), { draft: c, setDraft: d, flush: u, cancel: f } = ee({
+    const [i, s] = U(n), { draft: a, setDraft: o, flush: d, cancel: u } = ee({
       value: t ? t(i) : i == null ? "" : String(i),
-      commit: (o) => s(e(o, n))
+      commit: (f) => s(e(f, n))
     });
-    return /* @__PURE__ */ w("span", { className: "bd-input bd-input-textarea", children: [
+    return /* @__PURE__ */ A("span", { className: "bd-input bd-input-textarea", children: [
       /* @__PURE__ */ r(
         "textarea",
         {
           rows: n.config.rows ?? 10,
-          value: c,
+          value: a,
           placeholder: n.config.placeholder,
-          onChange: (o) => d(o.target.value),
-          onBlur: u,
-          onKeyDown: (o) => {
-            o.key === "Escape" && (f(), o.target.blur());
+          onChange: (f) => o(f.target.value),
+          onBlur: d,
+          onKeyDown: (f) => {
+            f.key === "Escape" && (u(), f.target.blur());
           }
         }
       ),
@@ -659,78 +667,78 @@ function fe(e, t) {
     ] });
   };
 }
-const Jt = (e) => {
-  const [t, l] = B(e), [n, i] = A(""), s = Ne(t).map(String), c = (u, f, o) => {
+const nn = (e) => {
+  const [t, l] = U(e), [n, i] = w(""), s = Se(t).map(String), a = (d, u, f) => {
     if (e.add && e.remove)
-      f !== void 0 && e.add(f), o !== void 0 && e.remove(o);
+      u !== void 0 && e.add(u), f !== void 0 && e.remove(f);
     else {
-      l(u.length ? u : null);
+      l(d.length ? d : null);
       return;
     }
-    l(u);
-  }, d = () => {
-    const u = n.trim();
-    if (!u || s.includes(u)) {
+    l(d);
+  }, o = () => {
+    const d = n.trim();
+    if (!d || s.includes(d)) {
       i("");
       return;
     }
-    c([...s, u], u), i("");
+    a([...s, d], d), i("");
   };
-  return /* @__PURE__ */ w("span", { className: "bd-input bd-input-chips", children: [
-    /* @__PURE__ */ r("span", { className: "bd-chips", children: s.map((u) => /* @__PURE__ */ w("span", { className: "bd-chip", children: [
-      u,
-      /* @__PURE__ */ r("button", { type: "button", className: "bd-chip-remove", onClick: () => c(s.filter((f) => f !== u), void 0, u), children: "×" })
-    ] }, u)) }),
+  return /* @__PURE__ */ A("span", { className: "bd-input bd-input-chips", children: [
+    /* @__PURE__ */ r("span", { className: "bd-chips", children: s.map((d) => /* @__PURE__ */ A("span", { className: "bd-chip", children: [
+      d,
+      /* @__PURE__ */ r("button", { type: "button", className: "bd-chip-remove", onClick: () => a(s.filter((u) => u !== d), void 0, d), children: "×" })
+    ] }, d)) }),
     /* @__PURE__ */ r(
       "input",
       {
         value: n,
         placeholder: e.config.placeholder ?? "add a value",
-        onChange: (u) => i(u.target.value),
-        onKeyDown: (u) => {
-          u.key === "Enter" && (u.preventDefault(), d()), u.key === "Escape" && i("");
+        onChange: (d) => i(d.target.value),
+        onKeyDown: (d) => {
+          d.key === "Enter" && (d.preventDefault(), o()), d.key === "Escape" && i("");
         },
-        onBlur: d
+        onBlur: o
       }
     ),
     /* @__PURE__ */ r(P, { status: e.status })
   ] });
-}, qt = {
+}, ln = {
   type: "text",
   empty: (e) => !e,
-  Control: fe((e) => z(e)),
+  Control: fe((e) => K(e)),
   View: de
-}, Ht = {
+}, sn = {
   type: "markdown",
   empty: (e) => !e,
-  Control: fe((e) => z(e)),
+  Control: fe((e) => K(e)),
   // renderMarkdown escapes first — the markup below is library-built, never raw input
-  View: ({ value: e }) => /* @__PURE__ */ r("div", { className: "bd-markdown", dangerouslySetInnerHTML: { __html: Zt(String(e ?? "")) } })
-}, Yt = {
+  View: ({ value: e }) => /* @__PURE__ */ r("div", { className: "bd-markdown", dangerouslySetInnerHTML: { __html: tn(String(e ?? "")) } })
+}, an = {
   type: ["varchar[]", "text[]", "tag[]"],
   default: () => [],
-  Control: Jt,
+  Control: nn,
   View: de
 };
-function Ze(e, t = !0) {
+function qe(e, t = !0) {
   return new Intl.NumberFormat("de-DE", { style: "decimal", minimumFractionDigits: 2, maximumFractionDigits: 2, useGrouping: t }).format(e).replace(/\./g, "'").replace(/,/g, ".");
 }
-function Qt(e, t) {
+function rn(e, t) {
   if (!t)
-    return Ze(e);
+    return qe(e);
   try {
     return new Intl.NumberFormat("de-DE", { currency: t, style: "currency" }).format(e).replace(/\./g, "'").replace(/,/g, ".");
   } catch {
-    return `${Ze(e)} ${t}`;
+    return `${qe(e)} ${t}`;
   }
 }
-function Xt(e) {
+function cn(e) {
   if (e === "" || e === null || e === void 0)
     return "";
   const t = parseFloat(e);
   return isNaN(t) ? String(e) : String(Math.round(t * 1e4) / 1e4);
 }
-function en(e) {
+function on(e) {
   const t = Math.max(0, Math.floor(e));
   return {
     d: Math.floor(t / 86400),
@@ -739,14 +747,14 @@ function en(e) {
     s: t % 60
   };
 }
-function tn(e, t) {
+function dn(e, t) {
   const l = Object.keys(e);
   if (l.length === 0)
     return "";
   if (t) {
     if (typeof e[t] == "string")
       return e[t];
-    const i = t.split("_")[0], s = l.find((c) => c === i || c.startsWith(`${i}_`));
+    const i = t.split("_")[0], s = l.find((a) => a === i || a.startsWith(`${i}_`));
     if (s && typeof e[s] == "string")
       return e[s];
   }
@@ -755,180 +763,180 @@ function tn(e, t) {
   const n = l.find((i) => typeof e[i] == "string");
   return n ? e[n] : "";
 }
-const nn = /(?:youtube\.com\/(?:watch\?(?:.*&)?v=|shorts\/|embed\/|live\/)|youtu\.be\/)([A-Za-z0-9_-]{11})/;
-function st(e) {
-  const t = e.match(nn);
+const un = /(?:youtube\.com\/(?:watch\?(?:.*&)?v=|shorts\/|embed\/|live\/)|youtu\.be\/)([A-Za-z0-9_-]{11})/;
+function ut(e) {
+  const t = e.match(un);
   return t ? t[1] : null;
 }
-function ln(e) {
+function fn(e) {
   if (e.thumbnail)
     return e.thumbnail;
   if (e["tn-oq"])
     return e["tn-oq"];
-  const t = e.url ? st(e.url) : null;
+  const t = e.url ? ut(e.url) : null;
   return t ? `https://img.youtube.com/vi/${t}/hqdefault.jpg` : null;
 }
-const sn = (e) => {
-  const [t, l] = B(e), n = e.config.baseLocale ?? e.settings.language ?? "en", i = t && typeof t == "object" ? t : {}, s = Object.keys(i).filter((a) => a !== n), [c, d] = A(""), u = (a) => {
-    const h = Object.fromEntries(Object.entries(a).filter(([m]) => m.trim() !== ""));
-    l(Object.keys(h).length > 0 ? h : null);
-  }, f = (a, h) => u({ ...i, [a]: h }), o = (a) => {
-    const h = { ...i };
-    delete h[a], u(h);
+const gn = (e) => {
+  const [t, l] = U(e), n = e.config.baseLocale ?? e.settings.language ?? "en", i = t && typeof t == "object" ? t : {}, s = Object.keys(i).filter((c) => c !== n), [a, o] = w(""), d = (c) => {
+    const b = Object.fromEntries(Object.entries(c).filter(([m]) => m.trim() !== ""));
+    l(Object.keys(b).length > 0 ? b : null);
+  }, u = (c, b) => d({ ...i, [c]: b }), f = (c) => {
+    const b = { ...i };
+    delete b[c], d(b);
   };
-  return /* @__PURE__ */ w("div", { className: "bd-input bd-input-i18n", children: [
-    /* @__PURE__ */ w("div", { className: "bd-i18n-row", children: [
+  return /* @__PURE__ */ A("div", { className: "bd-input bd-input-i18n", children: [
+    /* @__PURE__ */ A("div", { className: "bd-i18n-row", children: [
       /* @__PURE__ */ r("span", { className: "bd-i18n-locale", children: n }),
-      /* @__PURE__ */ r("input", { value: i[n] ?? "", onChange: (a) => f(n, a.target.value) }),
+      /* @__PURE__ */ r("input", { value: i[n] ?? "", onChange: (c) => u(n, c.target.value) }),
       /* @__PURE__ */ r(P, { status: e.status })
     ] }),
-    s.map((a) => /* @__PURE__ */ w("div", { className: "bd-i18n-row", children: [
-      /* @__PURE__ */ r("span", { className: "bd-i18n-locale", children: a }),
-      /* @__PURE__ */ r("input", { value: i[a] ?? "", onChange: (h) => f(a, h.target.value) }),
-      /* @__PURE__ */ r("button", { type: "button", onClick: () => o(a), children: "×" })
-    ] }, a)),
-    /* @__PURE__ */ w("div", { className: "bd-i18n-row bd-i18n-add", children: [
+    s.map((c) => /* @__PURE__ */ A("div", { className: "bd-i18n-row", children: [
+      /* @__PURE__ */ r("span", { className: "bd-i18n-locale", children: c }),
+      /* @__PURE__ */ r("input", { value: i[c] ?? "", onChange: (b) => u(c, b.target.value) }),
+      /* @__PURE__ */ r("button", { type: "button", onClick: () => f(c), children: "×" })
+    ] }, c)),
+    /* @__PURE__ */ A("div", { className: "bd-i18n-row bd-i18n-add", children: [
       /* @__PURE__ */ r(
         "input",
         {
           placeholder: "locale (fr, de…)",
-          value: c,
-          onChange: (a) => d(a.target.value),
-          onKeyDown: (a) => {
-            a.key === "Enter" && c.trim() && (f(c.trim(), ""), d(""));
+          value: a,
+          onChange: (c) => o(c.target.value),
+          onKeyDown: (c) => {
+            c.key === "Enter" && a.trim() && (u(a.trim(), ""), o(""));
           }
         }
       ),
       /* @__PURE__ */ r("button", { type: "button", onClick: () => {
-        c.trim() && (f(c.trim(), ""), d(""));
+        a.trim() && (u(a.trim(), ""), o(""));
       }, children: "+ locale" })
     ] })
   ] });
-}, an = {
+}, mn = {
   type: "texti18n",
   empty: (e) => !e || Object.keys(e).length === 0,
-  Control: sn,
-  View: ({ value: e, settings: t }) => /* @__PURE__ */ r("p", { className: "bd-texti18n bd-text", children: tn(e ?? {}, t == null ? void 0 : t.language) })
+  Control: gn,
+  View: ({ value: e, settings: t }) => /* @__PURE__ */ r("p", { className: "bd-texti18n bd-text", children: dn(e ?? {}, t == null ? void 0 : t.language) })
 };
-function at(e) {
+function ft(e) {
   const t = (n) => n === "" ? null : e ? parseFloat(n) || 0 : parseInt(n) || 0;
   return (n) => {
-    const [i, s] = B(n), { draft: c, setDraft: d, flush: u, cancel: f } = ee({
+    const [i, s] = U(n), { draft: a, setDraft: o, flush: d, cancel: u } = ee({
       value: i == null ? "" : String(i),
-      commit: (a) => s(t(a))
-    }), o = n.config.unit ?? (Array.isArray(n.attributeDetails.unit) ? n.attributeDetails.unit[0] : n.attributeDetails.unit);
-    return /* @__PURE__ */ w("span", { className: "bd-input bd-input-number", children: [
+      commit: (c) => s(t(c))
+    }), f = n.config.unit ?? (Array.isArray(n.attributeDetails.unit) ? n.attributeDetails.unit[0] : n.attributeDetails.unit);
+    return /* @__PURE__ */ A("span", { className: "bd-input bd-input-number", children: [
       /* @__PURE__ */ r(
         "input",
         {
           type: "number",
-          value: c,
+          value: a,
           min: n.config.min,
           max: n.config.max,
           step: e ? "any" : 1,
           placeholder: n.config.placeholder,
-          onChange: (a) => d(a.target.value),
-          onBlur: u,
-          onKeyDown: (a) => {
-            a.key === "Enter" && u(), a.key === "Escape" && (f(), a.target.blur());
+          onChange: (c) => o(c.target.value),
+          onBlur: d,
+          onKeyDown: (c) => {
+            c.key === "Enter" && d(), c.key === "Escape" && (u(), c.target.blur());
           }
         }
       ),
-      o ? /* @__PURE__ */ r("span", { className: "bd-input-unit", children: o }) : null,
+      f ? /* @__PURE__ */ r("span", { className: "bd-input-unit", children: f }) : null,
       /* @__PURE__ */ r(P, { status: n.status })
     ] });
   };
 }
-const rt = at(!1), Se = at(!0), rn = {
+const gt = ft(!1), Oe = ft(!0), hn = {
   type: ["int", "tinyint"],
   empty: (e) => e == null,
-  Control: rt,
+  Control: gt,
   Filter: ce,
   View: ({ value: e }) => /* @__PURE__ */ r("p", { className: "bd-number", children: String(e) })
-}, cn = {
+}, bn = {
   type: ["double", "float"],
   empty: (e) => e == null,
-  Control: Se,
+  Control: Oe,
   Filter: ce,
   View: ({ value: e }) => /* @__PURE__ */ r("p", { className: "bd-number", children: String(e) })
-}, on = {
+}, yn = {
   type: "percentage",
   empty: (e) => e == null,
-  Control: Se,
+  Control: Oe,
   Filter: ce,
-  View: ({ value: e }) => /* @__PURE__ */ w("p", { className: "bd-number bd-percentage", children: [
-    Xt(e),
+  View: ({ value: e }) => /* @__PURE__ */ A("p", { className: "bd-number bd-percentage", children: [
+    cn(e),
     " ",
     /* @__PURE__ */ r("span", { className: "bd-percentage-sign", children: "%" })
   ] })
-}, dn = {
+}, vn = {
   type: "currency",
   empty: (e) => e == null,
-  Control: Se,
+  Control: Oe,
   Filter: ce,
   View: ({ value: e, attributeDetails: t, config: l }) => {
     const n = (l == null ? void 0 : l.unit) ?? (Array.isArray(t == null ? void 0 : t.unit) ? t == null ? void 0 : t.unit[0] : t == null ? void 0 : t.unit);
-    return /* @__PURE__ */ r("p", { className: "bd-number bd-currency", children: Qt(Number(e), n) });
+    return /* @__PURE__ */ r("p", { className: "bd-number bd-currency", children: rn(Number(e), n) });
   }
-}, un = {
+}, pn = {
   type: "duration",
   empty: (e) => e == null,
   defaultConfig: { min: 0, placeholder: "seconds" },
-  Control: rt,
+  Control: gt,
   Filter: ce,
   View: ({ value: e }) => {
-    const t = en(Number(e) || 0), l = ["d", "h", "m", "s"].filter((n) => t[n] > 0);
+    const t = on(Number(e) || 0), l = ["d", "h", "m", "s"].filter((n) => t[n] > 0);
     return /* @__PURE__ */ r("p", { className: "bd-duration", children: l.length === 0 ? "0s" : l.map((n) => `${t[n]}${n}`).join(" ") });
   }
-}, fn = /^[a-zA-Z0-9.!#$%&'*+\/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/, ct = /^https?:\/\/(?:www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b(?:[-a-zA-Z0-9()@:%_\+.~#?&\/=]*)$/, gn = {
+}, Cn = /^[a-zA-Z0-9.!#$%&'*+\/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/, mt = /^https?:\/\/(?:www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b(?:[-a-zA-Z0-9()@:%_\+.~#?&\/=]*)$/, Nn = {
   type: "email",
   empty: (e) => !e,
-  Control: oe({ type: "email", pattern: fn, errorMsg: "Wrong email address!", serialize: z }),
+  Control: oe({ type: "email", pattern: Cn, errorMsg: "Wrong email address!", serialize: K }),
   View: ({ value: e }) => /* @__PURE__ */ r("a", { className: "bd-email", href: `mailto:${e}`, children: String(e) })
-}, hn = {
+}, wn = {
   type: "url",
   empty: (e) => !e,
-  Control: oe({ type: "url", pattern: ct, errorMsg: "Wrong URL!", serialize: z }),
+  Control: oe({ type: "url", pattern: mt, errorMsg: "Wrong URL!", serialize: K }),
   View: ({ value: e }) => /* @__PURE__ */ r("a", { className: "bd-url", href: ue(e), target: "_blank", rel: "noopener noreferrer", children: String(e) })
-}, mn = (e) => {
-  const [t, l] = B(e), n = typeof t == "object" && t !== null ? t : {}, i = typeof t == "object" ? (t == null ? void 0 : t.url) ?? "" : t ?? "", { draft: s, setDraft: c, flush: d, cancel: u } = ee({
+}, An = (e) => {
+  const [t, l] = U(e), n = typeof t == "object" && t !== null ? t : {}, i = typeof t == "object" ? (t == null ? void 0 : t.url) ?? "" : t ?? "", { draft: s, setDraft: a, flush: o, cancel: d } = ee({
     value: String(i),
-    commit: (f) => {
-      if (!f) {
+    commit: (u) => {
+      if (!u) {
         l(null);
         return;
       }
-      if (!ct.test(f))
+      if (!mt.test(u))
         return;
-      const o = st(f), a = n.thumbnail ?? (o ? `https://img.youtube.com/vi/${o}/hqdefault.jpg` : void 0);
-      l({ ...n, url: f, ...a ? { thumbnail: a } : {} });
+      const f = ut(u), c = n.thumbnail ?? (f ? `https://img.youtube.com/vi/${f}/hqdefault.jpg` : void 0);
+      l({ ...n, url: u, ...c ? { thumbnail: c } : {} });
     }
   });
-  return /* @__PURE__ */ w("span", { className: "bd-input bd-input-text bd-input-youtube", children: [
+  return /* @__PURE__ */ A("span", { className: "bd-input bd-input-text bd-input-youtube", children: [
     /* @__PURE__ */ r(
       "input",
       {
         type: "url",
         value: s,
         placeholder: e.config.placeholder ?? "https://www.youtube.com/watch?v=…",
-        onChange: (f) => c(f.target.value),
-        onBlur: d,
-        onKeyDown: (f) => {
-          f.key === "Enter" && d(), f.key === "Escape" && (u(), f.target.blur());
+        onChange: (u) => a(u.target.value),
+        onBlur: o,
+        onKeyDown: (u) => {
+          u.key === "Enter" && o(), u.key === "Escape" && (d(), u.target.blur());
         }
       }
     ),
     /* @__PURE__ */ r(P, { status: e.status })
   ] });
-}, bn = {
+}, Sn = {
   type: "youtube",
   empty: (e) => !e || typeof e == "object" && !e.url,
-  Control: mn,
+  Control: An,
   View: ({ value: e }) => {
-    const t = typeof e == "object" && e !== null ? e : { url: String(e ?? "") }, l = ln(t);
+    const t = typeof e == "object" && e !== null ? e : { url: String(e ?? "") }, l = fn(t);
     return t.url ? /* @__PURE__ */ r("a", { className: "bd-youtube", href: ue(t.url), target: "_blank", rel: "noopener noreferrer", children: l ? /* @__PURE__ */ r("img", { src: l, alt: "video" }) : String(t.url) }) : null;
   }
-}, yn = {
+}, $n = {
   type: "json",
   Control: fe(
     // same bytes as the vanilla control: parse or null, with the invalid flag raised
@@ -945,21 +953,21 @@ const rt = at(!1), Se = at(!0), rn = {
     (e) => e == null ? "" : JSON.stringify(e, null, 2)
   ),
   View: ({ value: e }) => /* @__PURE__ */ r("div", { className: "bd-json", children: /* @__PURE__ */ r("pre", { children: JSON.stringify(e, null, 2) }) })
-}, ve = ["plain", "javascript", "typescript", "python", "php", "ruby", "go", "rust", "java", "c", "cpp", "csharp", "html", "css", "sql", "shell", "json", "yaml", "markdown"], vn = (e) => {
-  const [t, l] = B(e), n = (t == null ? void 0 : t.language) ?? null, [i] = A(!1), { draft: s, setDraft: c, flush: d, cancel: u } = ee({
+}, pe = ["plain", "javascript", "typescript", "python", "php", "ruby", "go", "rust", "java", "c", "cpp", "csharp", "html", "css", "sql", "shell", "json", "yaml", "markdown"], kn = (e) => {
+  const [t, l] = U(e), n = (t == null ? void 0 : t.language) ?? null, [i] = w(!1), { draft: s, setDraft: a, flush: o, cancel: d } = ee({
     value: (t == null ? void 0 : t.content) ?? "",
-    commit: (o) => l(o ? { content: o, language: n } : null)
-  }), f = n && !ve.includes(n) ? [...ve, n] : ve;
-  return /* @__PURE__ */ w("div", { className: "bd-input bd-input-code", children: [
+    commit: (f) => l(f ? { content: f, language: n } : null)
+  }), u = n && !pe.includes(n) ? [...pe, n] : pe;
+  return /* @__PURE__ */ A("div", { className: "bd-input bd-input-code", children: [
     /* @__PURE__ */ r(
       "select",
       {
         value: n ?? "plain",
-        onChange: (o) => {
-          const a = o.target.value === "plain" ? null : o.target.value;
-          s && l({ content: s, language: a });
+        onChange: (f) => {
+          const c = f.target.value === "plain" ? null : f.target.value;
+          s && l({ content: s, language: c });
         },
-        children: f.map((o) => /* @__PURE__ */ r("option", { value: o, children: o }, o))
+        children: u.map((f) => /* @__PURE__ */ r("option", { value: f, children: f }, f))
       }
     ),
     /* @__PURE__ */ r(
@@ -968,26 +976,26 @@ const rt = at(!1), Se = at(!0), rn = {
         rows: e.config.rows ?? 10,
         spellCheck: !1,
         value: s,
-        onChange: (o) => c(o.target.value),
-        onBlur: d,
-        onKeyDown: (o) => {
-          o.key === "Escape" && (u(), o.target.blur());
+        onChange: (f) => a(f.target.value),
+        onBlur: o,
+        onKeyDown: (f) => {
+          f.key === "Escape" && (d(), f.target.blur());
         }
       }
     ),
     /* @__PURE__ */ r(P, { status: e.status }),
     i ? /* @__PURE__ */ r("span", { className: "bd-input-error", children: "Invalid" }) : null
   ] });
-}, pn = {
+}, On = {
   type: "code",
   empty: (e) => !(e != null && e.content),
-  Control: vn,
-  View: ({ value: e, config: t }) => e != null && e.content ? /* @__PURE__ */ w("div", { className: `bd-code${e.language ? ` bd-code-${e.language}` : ""}`, children: [
+  Control: kn,
+  View: ({ value: e, config: t }) => e != null && e.content ? /* @__PURE__ */ A("div", { className: `bd-code${e.language ? ` bd-code-${e.language}` : ""}`, children: [
     t != null && t.showLanguage && e.language ? /* @__PURE__ */ r("span", { className: "bd-code-language", children: e.language }) : null,
     /* @__PURE__ */ r("pre", { children: /* @__PURE__ */ r("code", { children: e.content }) })
   ] }) : null
 };
-function ot(e) {
+function ht(e) {
   const t = (i) => i ? e ? i.replace(" ", "T").slice(0, 16) : i.slice(0, 10) : "", l = (i) => {
     if (!i)
       return null;
@@ -997,61 +1005,61 @@ function ot(e) {
     return s.length === 16 ? `${s}:00` : s;
   };
   return (i) => {
-    const [s, c] = B(i);
-    return /* @__PURE__ */ w("span", { className: "bd-input bd-input-date", children: [
+    const [s, a] = U(i);
+    return /* @__PURE__ */ A("span", { className: "bd-input bd-input-date", children: [
       /* @__PURE__ */ r(
         "input",
         {
           type: e ? "datetime-local" : "date",
           value: t(s),
-          onChange: (d) => c(l(d.target.value))
+          onChange: (o) => a(l(o.target.value))
         }
       ),
       /* @__PURE__ */ r(P, { status: i.status })
     ] });
   };
 }
-const Cn = {
+const Mn = {
   type: "date",
   empty: (e) => !e,
-  Control: ot(!1),
+  Control: ht(!1),
   View: ({ value: e }) => /* @__PURE__ */ r("div", { className: "bd-date", children: String(e) })
-}, Nn = {
+}, En = {
   type: "datetime",
   empty: (e) => !e,
   defaultConfig: { time: !0 },
-  Control: ot(!0),
+  Control: ht(!0),
   View: ({ value: e }) => /* @__PURE__ */ r("div", { className: "bd-datetime", children: String(e) })
-}, te = ({ items: e, search: t, multiple: l, value: n, onChange: i, placeholder: s, selectedLabels: c, required: d, status: u }) => {
-  const [f, o] = A(!1), [a, h] = A(""), [m, b] = A(e ?? []), [v, N] = A(!1), O = j(null), [S, $] = A({ ...c });
+}, te = ({ items: e, search: t, multiple: l, value: n, onChange: i, placeholder: s, selectedLabels: a, required: o, status: d }) => {
+  const [u, f] = w(!1), [c, b] = w(""), [m, h] = w(e ?? []), [v, N] = w(!1), O = _(null), [S, $] = w({ ...a });
   L(() => {
-    e && b(e);
+    e && h(e);
   }, [e]), L(() => {
-    c && $((C) => ({ ...C, ...c }));
-  }, [c]), L(() => {
-    if (!t || !f)
+    a && $((C) => ({ ...C, ...a }));
+  }, [a]), L(() => {
+    if (!t || !u)
       return;
     let C = !1;
     N(!0);
     const y = setTimeout(() => {
-      t(a).then((E) => {
-        C || b(E);
+      t(c).then((E) => {
+        C || h(E);
       }).catch((E) => console.error("[BlitzUIManagerReact] picker search failed:", (E == null ? void 0 : E.message) ?? E)).finally(() => {
         C || N(!1);
       });
-    }, a ? 500 : 0);
+    }, c ? 500 : 0);
     return () => {
       C = !0, clearTimeout(y);
     };
-  }, [t, a, f]), L(() => {
-    if (!f)
+  }, [t, c, u]), L(() => {
+    if (!u)
       return;
     const C = (y) => {
       var E;
-      (E = O.current) != null && E.contains(y.target) || o(!1);
+      (E = O.current) != null && E.contains(y.target) || f(!1);
     };
     return document.addEventListener("mousedown", C), () => document.removeEventListener("mousedown", C);
-  }, [f]), L(() => {
+  }, [u]), L(() => {
     m.length && $((C) => ({ ...C, ...Object.fromEntries(m.map((y) => [y.value, y.label])) }));
   }, [m]);
   const T = (C) => C.map((y) => m.find((E) => E.value === y) ?? { value: y, label: S[y] ?? y }), M = (C) => {
@@ -1059,43 +1067,43 @@ const Cn = {
       const y = n.includes(C.value) ? n.filter((E) => E !== C.value) : [...n, C.value];
       i(T(y));
     } else
-      i([C]), o(!1);
+      i([C]), f(!1);
   }, D = () => {
-    i([]), o(!1);
-  }, x = n.length ? n.map((C) => S[C] ?? C).join(", ") : s ?? "Select…", F = t ? m : m.filter((C) => !a || C.label.toLowerCase().includes(a.toLowerCase()));
-  return /* @__PURE__ */ w("div", { className: "bd-picker", ref: O, children: [
+    i([]), f(!1);
+  }, x = n.length ? n.map((C) => S[C] ?? C).join(", ") : s ?? "Select…", F = t ? m : m.filter((C) => !c || typeof C.label == "string" && C.label.toLowerCase().includes(c.toLowerCase()));
+  return /* @__PURE__ */ A("div", { className: "bd-picker", ref: O, children: [
     /* @__PURE__ */ r(
       "button",
       {
         type: "button",
         className: `bd-picker-display${n.length ? "" : " bd-picker-placeholder"}`,
-        onClick: () => o((C) => !C),
+        onClick: () => f((C) => !C),
         onKeyDown: (C) => {
-          C.key === "Escape" && o(!1);
+          C.key === "Escape" && f(!1);
         },
         children: x
       }
     ),
-    /* @__PURE__ */ r(P, { status: u }),
-    f ? /* @__PURE__ */ w("div", { className: "bd-picker-menu", children: [
+    /* @__PURE__ */ r(P, { status: d }),
+    u ? /* @__PURE__ */ A("div", { className: "bd-picker-menu", children: [
       t || m.length > 7 ? /* @__PURE__ */ r(
         "input",
         {
           className: "bd-picker-search",
           autoFocus: !0,
-          value: a,
+          value: c,
           placeholder: "Search…",
-          onChange: (C) => h(C.target.value),
+          onChange: (C) => b(C.target.value),
           onKeyDown: (C) => {
-            C.key === "Escape" && o(!1);
+            C.key === "Escape" && f(!1);
           }
         }
       ) : null,
-      /* @__PURE__ */ w("ul", { className: "bd-picker-options", role: "listbox", children: [
-        !d && !l && n.length ? /* @__PURE__ */ r("li", { className: "bd-picker-clear", onClick: D, children: "Clear" }) : null,
+      /* @__PURE__ */ A("ul", { className: "bd-picker-options", role: "listbox", children: [
+        !o && !l && n.length ? /* @__PURE__ */ r("li", { className: "bd-picker-clear", onClick: D, children: "Clear" }) : null,
         v ? /* @__PURE__ */ r("li", { className: "bd-picker-loading", children: "Loading…" }) : null,
         !v && F.length === 0 ? /* @__PURE__ */ r("li", { className: "bd-picker-loading", children: "No results" }) : null,
-        F.map((C) => /* @__PURE__ */ w(
+        F.map((C) => /* @__PURE__ */ A(
           "li",
           {
             role: "option",
@@ -1112,46 +1120,47 @@ const Cn = {
       ] })
     ] }) : null
   ] });
-}, An = (e) => e.charAt(0).toUpperCase() + e.slice(1), dt = (e) => {
-  const t = e.attributeDetails.options ?? e.config.options ?? [], l = e.config.excludeOptions ?? [];
-  return t.filter((n) => !l.includes(n)).map((n) => ({ value: n, label: An(n) }));
-}, wn = (e) => {
-  const [t, l] = B(e), n = !!e.config.multiple, i = we(t);
+}, Tn = (e) => e.charAt(0).toUpperCase() + e.slice(1), bt = (e) => {
+  var s, a;
+  const t = e.attributeDetails.options ?? e.config.options ?? [], l = e.config.excludeOptions ?? [], n = (s = e.attributeDetails) == null ? void 0 : s.options_labels, i = ((a = e.settings) == null ? void 0 : a.language) ?? "en";
+  return t.filter((o) => !l.includes(o)).map((o) => ({ value: o, label: jt(n, o, i, Tn(o)) }));
+}, Ln = (e) => {
+  const [t, l] = U(e), n = !!e.config.multiple, i = ke(t);
   return /* @__PURE__ */ r(
     te,
     {
-      items: dt(e),
+      items: bt(e),
       multiple: n,
       value: i,
       placeholder: e.config.placeholder,
       status: e.status,
       onChange: (s) => {
-        const c = s.map((d) => d.value);
-        n ? lt(e, i, c) : l(c[0] ?? null);
+        const a = s.map((o) => o.value);
+        n ? ot(e, i, a) : l(a[0] ?? null);
       }
     }
   );
-}, Sn = (e) => {
-  const t = e.value, [l, n] = A((t == null ? void 0 : t.values) ?? []);
+}, Fn = (e) => {
+  const t = e.value, [l, n] = w((t == null ? void 0 : t.values) ?? []);
   return /* @__PURE__ */ r(
     te,
     {
-      items: dt(e),
+      items: bt(e),
       multiple: !0,
       value: l,
       placeholder: e.config.placeholder ?? "Any",
       onChange: (i) => {
-        const s = i.map((c) => c.value);
+        const s = i.map((a) => a.value);
         n(s), e.onChange(s.length ? { op: "in", values: s } : null);
       }
     }
   );
-}, $n = {
+}, In = {
   type: ["enum", "enum[]"],
-  Control: wn,
-  Filter: Sn,
-  View: ({ value: e }) => /* @__PURE__ */ r("div", { className: "bd-enum", children: /* @__PURE__ */ r("p", { children: nt(e) }) })
-}, kn = [
+  Control: Ln,
+  Filter: Fn,
+  View: ({ value: e }) => /* @__PURE__ */ r("div", { className: "bd-enum", children: /* @__PURE__ */ r("p", { children: ct(e) }) })
+}, Dn = [
   {
     code: "AF",
     dial: "+93"
@@ -2121,7 +2130,7 @@ const Cn = {
     dial: "+263"
   }
 ];
-function On(e, t, l = !1) {
+function xn(e, t, l = !1) {
   const n = e.replace(/[^\d+]/g, ""), i = [];
   if (n.length === 10)
     i.push(n.slice(0, 3)), i.push(n.slice(3, 6)), i.push(n.slice(6, 8)), i.push(n.slice(8, 10));
@@ -2130,69 +2139,69 @@ function On(e, t, l = !1) {
   else if (n.length === 11)
     i.push(n.slice(0, 3)), i.push(n.slice(3, 7)), i.push(n.slice(7, 11));
   else
-    for (let c = 0; c < n.length; c += 3)
-      i.push(n.slice(c, c + 3));
+    for (let a = 0; a < n.length; a += 3)
+      i.push(n.slice(a, a + 3));
   const s = i.filter(Boolean).join(" ");
   return t && l ? `${t} ${s}` : s;
 }
-const Mn = /^[0-9]{7,14}$/, ut = (e, t) => {
+const jn = /^[0-9]{7,14}$/, yt = (e, t) => {
   if (!e)
     return { dial: t, digits: "" };
   const l = e.indexOf("-");
   return l === -1 ? { dial: t, digits: e } : { dial: e.slice(0, l), digits: e.slice(l + 1) };
-}, En = (e) => {
-  const [t, l] = B(e), n = e.config.defaultDialCode ?? "+1", { dial: i, digits: s } = ut(t, n), c = U(() => {
-    const a = /* @__PURE__ */ new Set();
-    return kn.filter((h) => a.has(h.dial) ? !1 : (a.add(h.dial), !0));
-  }, []), { draft: d, setDraft: u, flush: f, cancel: o } = ee({
+}, _n = (e) => {
+  const [t, l] = U(e), n = e.config.defaultDialCode ?? "+1", { dial: i, digits: s } = yt(t, n), a = R(() => {
+    const c = /* @__PURE__ */ new Set();
+    return Dn.filter((b) => c.has(b.dial) ? !1 : (c.add(b.dial), !0));
+  }, []), { draft: o, setDraft: d, flush: u, cancel: f } = ee({
     value: s,
-    commit: (a) => l(a ? `${i}-${a}` : null),
-    validate: (a) => a === "" || Mn.test(a)
+    commit: (c) => l(c ? `${i}-${c}` : null),
+    validate: (c) => c === "" || jn.test(c)
   });
-  return /* @__PURE__ */ w("span", { className: "bd-input bd-input-phone", children: [
+  return /* @__PURE__ */ A("span", { className: "bd-input bd-input-phone", children: [
     /* @__PURE__ */ r(
       "select",
       {
         value: i,
-        onChange: (a) => {
-          s && l(`${a.target.value}-${s}`);
+        onChange: (c) => {
+          s && l(`${c.target.value}-${s}`);
         },
-        children: c.map((a) => /* @__PURE__ */ w("option", { value: a.dial, children: [
-          a.code,
+        children: a.map((c) => /* @__PURE__ */ A("option", { value: c.dial, children: [
+          c.code,
           " ",
-          a.dial
-        ] }, a.dial))
+          c.dial
+        ] }, c.dial))
       }
     ),
     /* @__PURE__ */ r(
       "input",
       {
         type: "tel",
-        value: d,
+        value: o,
         placeholder: e.config.placeholder ?? "phone number",
-        onChange: (a) => u(a.target.value.replace(/[^0-9]/g, "")),
-        onBlur: f,
-        onKeyDown: (a) => {
-          a.key === "Enter" && f(), a.key === "Escape" && (o(), a.target.blur());
+        onChange: (c) => d(c.target.value.replace(/[^0-9]/g, "")),
+        onBlur: u,
+        onKeyDown: (c) => {
+          c.key === "Enter" && u(), c.key === "Escape" && (f(), c.target.blur());
         }
       }
     ),
     /* @__PURE__ */ r(P, { status: e.status })
   ] });
-}, Tn = {
+}, Un = {
   type: "phone",
   empty: (e) => !e,
-  Control: En,
+  Control: _n,
   View: ({ value: e }) => {
-    const { dial: t, digits: l } = ut(String(e ?? ""), "");
-    return /* @__PURE__ */ w("p", { className: "bd-phone", children: [
+    const { dial: t, digits: l } = yt(String(e ?? ""), "");
+    return /* @__PURE__ */ A("p", { className: "bd-phone", children: [
       t ? `${t} ` : "",
-      On(l)
+      xn(l)
     ] });
   }
-}, ft = wt(tt), fl = ft.Provider;
-function J() {
-  return St(ft);
+}, vt = Et(rt), Sl = vt.Provider;
+function H() {
+  return Tt(vt);
 }
 const re = (e) => {
   var l;
@@ -2205,53 +2214,53 @@ const re = (e) => {
       return n;
   }
   return null;
-}, Je = (e, t) => {
+}, Ye = (e, t) => {
   var i, s;
   const l = ((i = e == null ? void 0 : e._blitzID) == null ? void 0 : i.value) ?? "", n = (t ? (s = e == null ? void 0 : e[t]) == null ? void 0 : s.value : null) ?? l;
   return { value: String(l), label: String(n), obj: e };
 };
-function $e(e, t) {
-  const l = Array.isArray(e.attributeDetails.type) ? e.attributeDetails.type[0] : e.attributeDetails.type, [n, i] = A(null), [s, c] = A({});
+function Me(e, t) {
+  const l = Array.isArray(e.attributeDetails.type) ? e.attributeDetails.type[0] : e.attributeDetails.type, [n, i] = w(null), [s, a] = w({});
   L(() => {
-    let f = !1;
+    let u = !1;
     if (l)
-      return e.resolveModel(String(l)).then((o) => {
-        f || i(o);
-      }).catch((o) => console.error("[BlitzUIManagerReact] fk model resolve failed:", (o == null ? void 0 : o.message) ?? o)), () => {
-        f = !0;
+      return e.resolveModel(String(l)).then((f) => {
+        u || i(f);
+      }).catch((f) => console.error("[BlitzUIManagerReact] fk model resolve failed:", (f == null ? void 0 : f.message) ?? f)), () => {
+        u = !0;
       };
   }, [l]);
-  const d = t.join(",");
+  const o = t.join(",");
   return L(() => {
     if (!n || !t.length)
       return;
-    let f = !1;
-    const o = re(n);
-    return Promise.all(t.map((a) => n.get(a).catch(() => null))).then((a) => {
-      if (f)
+    let u = !1;
+    const f = re(n);
+    return Promise.all(t.map((c) => n.get(c).catch(() => null))).then((c) => {
+      if (u)
         return;
-      const h = {};
-      for (const m of a) {
+      const b = {};
+      for (const m of c) {
         if (!m)
           continue;
-        const b = Je(m, o);
-        h[b.value] = b.label;
+        const h = Ye(m, f);
+        b[h.value] = h.label;
       }
-      c(h);
+      a(b);
     }), () => {
-      f = !0;
+      u = !0;
     };
-  }, [n, d]), { search: U(() => {
+  }, [n, o]), { search: R(() => {
     if (n)
-      return async (f) => {
-        const o = re(n), a = f && o ? [[o, "LIKE", `%${f}%`]] : void 0;
-        return (await n.list({ conditions: a, limit: e.config.limit ?? 100 })).map((m) => Je(m, o));
+      return async (u) => {
+        const f = re(n), c = u && f ? [[f, "LIKE", `%${u}%`]] : void 0;
+        return (await n.list({ conditions: c, limit: e.config.limit ?? 100 })).map((m) => Ye(m, f));
       };
   }, [n, e.config.limit]), labels: s, ready: !!n };
 }
-const Ln = (e) => {
-  var c;
-  const [t, l] = B(e), n = t == null || t === "" ? [] : [String(((c = t == null ? void 0 : t._blitzID) == null ? void 0 : c.value) ?? t)], { search: i, labels: s } = $e(e, n);
+const Vn = (e) => {
+  var a;
+  const [t, l] = U(e), n = t == null || t === "" ? [] : [String(((a = t == null ? void 0 : t._blitzID) == null ? void 0 : a.value) ?? t)], { search: i, labels: s } = Me(e, n);
   return /* @__PURE__ */ r(
     te,
     {
@@ -2260,14 +2269,14 @@ const Ln = (e) => {
       selectedLabels: s,
       placeholder: e.config.placeholder,
       status: e.status,
-      onChange: (d) => {
-        var u;
-        return l(((u = d[0]) == null ? void 0 : u.value) ?? null);
+      onChange: (o) => {
+        var d;
+        return l(((d = o[0]) == null ? void 0 : d.value) ?? null);
       }
     }
   );
-}, Fn = (e) => {
-  const [t] = B(e), l = we(t), { search: n, labels: i } = $e(e, l);
+}, Bn = (e) => {
+  const [t] = U(e), l = ke(t), { search: n, labels: i } = Me(e, l);
   return /* @__PURE__ */ r(
     te,
     {
@@ -2277,11 +2286,11 @@ const Ln = (e) => {
       selectedLabels: i,
       placeholder: e.config.placeholder,
       status: e.status,
-      onChange: (s) => lt(e, l, s.map((c) => c.value))
+      onChange: (s) => ot(e, l, s.map((a) => a.value))
     }
   );
-}, gt = (e) => {
-  const t = e.value, [l, n] = A((t == null ? void 0 : t.values) ?? []), { search: i, labels: s } = $e(e, l);
+}, pt = (e) => {
+  const t = e.value, [l, n] = w((t == null ? void 0 : t.values) ?? []), { search: i, labels: s } = Me(e, l);
   return /* @__PURE__ */ r(
     te,
     {
@@ -2290,92 +2299,92 @@ const Ln = (e) => {
       value: l,
       selectedLabels: s,
       placeholder: e.config.placeholder ?? "Any",
-      onChange: (c) => {
-        const d = c.map((u) => u.value);
-        n(d), e.onChange(d.length ? { op: "in", values: d } : null);
+      onChange: (a) => {
+        const o = a.map((d) => d.value);
+        n(o), e.onChange(o.length ? { op: "in", values: o } : null);
       }
     }
   );
-}, ht = ({ value: e, attributeDetails: t }) => {
-  const l = J(), n = we(e), [i, s] = A({}), c = Array.isArray(t == null ? void 0 : t.type) ? t == null ? void 0 : t.type[0] : t == null ? void 0 : t.type, d = n.join(",");
+}, Ct = ({ value: e, attributeDetails: t }) => {
+  const l = H(), n = ke(e), [i, s] = w({}), a = Array.isArray(t == null ? void 0 : t.type) ? t == null ? void 0 : t.type[0] : t == null ? void 0 : t.type, o = n.join(",");
   return L(() => {
-    if (!c || !n.length)
+    if (!a || !n.length)
       return;
-    let u = !1;
+    let d = !1;
     return (async () => {
-      var f;
+      var u;
       try {
-        const o = await l.resolveModel(String(c)), a = re(o);
-        if (!a)
+        const f = await l.resolveModel(String(a)), c = re(f);
+        if (!c)
           return;
-        const h = {};
+        const b = {};
         for (const m of n) {
-          const b = await o.get(m).catch(() => null), v = (f = b == null ? void 0 : b[a]) == null ? void 0 : f.value;
-          v != null && (h[m] = String(v));
+          const h = await f.get(m).catch(() => null), v = (u = h == null ? void 0 : h[c]) == null ? void 0 : u.value;
+          v != null && (b[m] = String(v));
         }
-        !u && Object.keys(h).length && s(h);
+        !d && Object.keys(b).length && s(b);
       } catch {
       }
     })(), () => {
-      u = !0;
+      d = !0;
     };
-  }, [d, c]), /* @__PURE__ */ r("p", { className: "bd-fk", children: n.map((u) => i[u] ?? u).join(", ") });
-}, In = {
+  }, [o, a]), /* @__PURE__ */ r("p", { className: "bd-fk", children: n.map((d) => i[d] ?? d).join(", ") });
+}, Rn = {
   type: "fk",
-  Control: Ln,
-  Filter: gt,
-  View: ht
-}, Dn = {
+  Control: Vn,
+  Filter: pt,
+  View: Ct
+}, Pn = {
   type: "mtm",
   default: () => null,
-  Control: Fn,
-  Filter: gt,
-  View: ht
-}, qe = (e, t) => {
+  Control: Bn,
+  Filter: pt,
+  View: Ct
+}, Xe = (e, t) => {
   var i, s;
   const l = ((i = e == null ? void 0 : e._blitzID) == null ? void 0 : i.value) ?? "", n = (t ? (s = e == null ? void 0 : e[t]) == null ? void 0 : s.value : null) ?? l;
   return { value: String(l), label: String(n), obj: e };
-}, xn = (e) => e.filter((t, l, n) => n.findIndex((i) => i.value === t.value) === l);
-function _n(e, t) {
-  const l = e.config.usersModel, [n, i] = A(null), [s, c] = A({});
+}, zn = (e) => e.filter((t, l, n) => n.findIndex((i) => i.value === t.value) === l);
+function Kn(e, t) {
+  const l = e.config.usersModel, [n, i] = w(null), [s, a] = w({});
   L(() => {
-    let o = !1;
+    let f = !1;
     if (l)
-      return e.resolveModel(String(l)).then((a) => {
-        o || i(a);
-      }).catch((a) => console.error("[BlitzUIManagerReact] user model resolve failed:", (a == null ? void 0 : a.message) ?? a)), () => {
-        o = !0;
+      return e.resolveModel(String(l)).then((c) => {
+        f || i(c);
+      }).catch((c) => console.error("[BlitzUIManagerReact] user model resolve failed:", (c == null ? void 0 : c.message) ?? c)), () => {
+        f = !0;
       };
   }, [l]);
-  const d = n ? e.config.labelAttribute ?? re(n) : null, u = t.join(",");
+  const o = n ? e.config.labelAttribute ?? re(n) : null, d = t.join(",");
   return L(() => {
     if (!n || !t.length)
       return;
-    let o = !1;
-    return Promise.all(t.map((a) => n.get(a).catch(() => null))).then((a) => {
-      if (o)
+    let f = !1;
+    return Promise.all(t.map((c) => n.get(c).catch(() => null))).then((c) => {
+      if (f)
         return;
-      const h = {};
-      for (const m of a) {
+      const b = {};
+      for (const m of c) {
         if (!m)
           continue;
-        const b = qe(m, d);
-        h[b.value] = b.label;
+        const h = Xe(m, o);
+        b[h.value] = h.label;
       }
-      c(h);
+      a(b);
     }), () => {
-      o = !0;
+      f = !0;
     };
-  }, [n, u, d]), { search: U(() => {
+  }, [n, d, o]), { search: R(() => {
     if (n)
-      return async (o) => {
-        const a = o && d ? [[d, "LIKE", `%${o}%`]] : void 0, h = await n.list({ conditions: a, limit: e.config.limit ?? 100 });
-        return xn(h.map((m) => qe(m, d)));
+      return async (f) => {
+        const c = f && o ? [[o, "LIKE", `%${f}%`]] : void 0, b = await n.list({ conditions: c, limit: e.config.limit ?? 100 });
+        return zn(b.map((m) => Xe(m, o)));
       };
-  }, [n, d, e.config.limit]), labels: s };
+  }, [n, o, e.config.limit]), labels: s };
 }
-const jn = (e) => {
-  const t = e.value, [l, n] = A((t == null ? void 0 : t.values) ?? []), { search: i, labels: s } = _n(e, l);
+const Gn = (e) => {
+  const t = e.value, [l, n] = w((t == null ? void 0 : t.values) ?? []), { search: i, labels: s } = Kn(e, l);
   return /* @__PURE__ */ r(
     te,
     {
@@ -2384,85 +2393,135 @@ const jn = (e) => {
       value: l,
       selectedLabels: s,
       placeholder: e.config.placeholder ?? "Any",
-      onChange: (c) => {
-        const d = c.map((u) => u.value);
-        n(d), e.onChange(d.length ? { op: "in", values: d } : null);
+      onChange: (a) => {
+        const o = a.map((d) => d.value);
+        n(o), e.onChange(o.length ? { op: "in", values: o } : null);
       }
     }
   );
-}, Bn = {
+}, Wn = {
   type: "user",
   defaultConfig: { usersModel: "0BAUsers", labelAttribute: "username" },
-  Filter: jn
+  Filter: Gn
 };
-function ke(e) {
+function Ee(e) {
   const { accept: t, multiple: l, service: n, commit: i, preview: s } = e;
-  return (d) => {
-    const [u, f] = B(d), [o, a] = A(!1), [h, m] = A(null), b = j(null), v = d.services[n], N = async (O) => {
+  return (o) => {
+    const [d, u] = U(o), [f, c] = w(!1), [b, m] = w(null), h = _(null), v = o.services[n], N = async (O) => {
       if (O != null && O.length) {
         if (!v) {
           m(`No '${n}' service configured`);
           return;
         }
-        a(!0), m(null);
+        c(!0), m(null);
         try {
           const S = [];
           for (const $ of Array.from(O))
             S.push(await v($));
-          f(i(S));
+          u(i(S));
         } catch (S) {
           m((S == null ? void 0 : S.message) ?? "Upload failed");
         } finally {
-          a(!1), b.current && (b.current.value = "");
+          c(!1), h.current && (h.current.value = "");
         }
       }
     };
-    return /* @__PURE__ */ w("span", { className: "bd-input bd-input-upload", children: [
-      s && u != null ? /* @__PURE__ */ r(s, { value: u }) : null,
+    return /* @__PURE__ */ A("span", { className: "bd-input bd-input-upload", children: [
+      s && d != null ? /* @__PURE__ */ r(s, { value: d }) : null,
       /* @__PURE__ */ r(
         "input",
         {
-          ref: b,
+          ref: h,
           type: "file",
           accept: t,
           multiple: l,
-          disabled: o,
+          disabled: f,
           onChange: (O) => void N(O.target.files)
         }
       ),
-      o ? /* @__PURE__ */ r("span", { className: "bd-uploading", children: "Uploading…" }) : null,
-      h ? /* @__PURE__ */ r("span", { className: "bd-input-error", children: h }) : null,
-      /* @__PURE__ */ r(P, { status: d.status })
+      f ? /* @__PURE__ */ r("span", { className: "bd-uploading", children: "Uploading…" }) : null,
+      b ? /* @__PURE__ */ r("span", { className: "bd-input-error", children: b }) : null,
+      /* @__PURE__ */ r(P, { status: o.status })
     ] });
   };
 }
-const Vn = (e) => e != null && e.base && typeof e.sd == "string" ? `${e.base}${e.sd.substring(1)}` : null, He = ({ value: e }) => {
-  const t = Ne(Array.isArray(e) ? e : [e]);
+const Zn = (e) => e != null && e.base && typeof e.sd == "string" ? `${e.base}${e.sd.substring(1)}` : null, Qe = ({ value: e }) => {
+  const t = Se(Array.isArray(e) ? e : [e]);
   return /* @__PURE__ */ r("span", { className: "bd-image-previews", children: t.map((l, n) => {
-    const i = Vn(l);
+    const i = Zn(l);
     return i ? /* @__PURE__ */ r("img", { src: i, alt: "" }, n) : null;
   }) });
-}, Rn = {
+}, Hn = {
   type: ["image", "image[]"],
   default: () => [],
   // the service returns ImageRawType; a single image is still stored as an array
-  Control: ke({ accept: "image/*", multiple: !0, service: "upload", commit: (e) => e, preview: He }),
-  View: ({ value: e }) => /* @__PURE__ */ r("div", { className: "bd-image", children: /* @__PURE__ */ r(He, { value: e }) })
-}, Un = {
+  Control: Ee({ accept: "image/*", multiple: !0, service: "upload", commit: (e) => e, preview: Qe }),
+  View: ({ value: e }) => /* @__PURE__ */ r("div", { className: "bd-image", children: /* @__PURE__ */ r(Qe, { value: e }) })
+}, Jn = {
   type: "file",
-  Control: ke({ service: "uploadFile", commit: (e) => e[0] }),
+  Control: Ee({ service: "uploadFile", commit: (e) => e[0] }),
   View: ({ value: e }) => {
     const t = typeof e == "string" ? e : e == null ? void 0 : e.url;
     return t ? /* @__PURE__ */ r("p", { children: /* @__PURE__ */ r("a", { className: "bd-file", href: ue(t), target: "_blank", rel: "noopener noreferrer", children: "Link" }) }) : null;
   }
-}, Pn = {
+}, qn = {
   type: "video",
-  Control: ke({ accept: ".mp4,.m4v,.mov", service: "uploadVideo", commit: (e) => e[0] }),
+  Control: Ee({ accept: ".mp4,.m4v,.mov", service: "uploadVideo", commit: (e) => e[0] }),
   View: ({ value: e }) => {
     const t = e == null ? void 0 : e.url;
     return t ? /* @__PURE__ */ r("video", { className: "bd-video", controls: !0, children: /* @__PURE__ */ r("source", { src: ue(t) }) }) : null;
   }
-}, Kn = [
+}, et = "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/", we = {
+  geocoderUrl: "https://nominatim.openstreetmap.org",
+  tileUrl: "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
+  attribution: '&copy; <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap</a> contributors',
+  leafletUrl: `${et}leaflet.js`,
+  leafletCssUrl: `${et}leaflet.css`
+}, tt = {
+  [we.leafletUrl]: "sha384-cxOPjt7s7Iz04uaHJceBmS+qpjv2JkIHNVcuOrM+YHwZOmJGBXI00mdUXEq65HTH",
+  [we.leafletCssUrl]: "sha384-sHL9NAb7lN7rfvG5lfHpm643Xkcjzp4jFvuavGOndn6pjVqS6ny56CAt3nsEVT4H"
+};
+function ge(e) {
+  return { ...we, ...e && typeof e == "object" ? e : {} };
+}
+let Ce = null;
+const nt = (e, t) => new Promise((l, n) => {
+  const i = document.createElement(e);
+  e === "script" ? i.src = t : (i.rel = "stylesheet", i.href = t), tt[t] && (i.integrity = tt[t], i.crossOrigin = "anonymous"), i.onload = () => l(), i.onerror = () => n(new Error(`Failed to load ${t}`)), document.head.appendChild(i);
+});
+function Yn(e = ge()) {
+  var t;
+  return (t = window.L) != null && t.map ? Promise.resolve(window.L) : (Ce ?? (Ce = Promise.all([nt("link", e.leafletCssUrl), nt("script", e.leafletUrl)]).then(() => window.L).catch((l) => {
+    throw Ce = null, l;
+  })), Ce);
+}
+const Xn = (e) => e.divIcon({ className: "bd-osm-pin", html: "<span></span>", iconSize: [22, 30], iconAnchor: [11, 30] });
+async function Qn(e, t, l, { draggable: n = !1, interactive: i = !0, config: s = ge() } = {}) {
+  const a = await Yn(s), o = a.map(e, { trackResize: !1, scrollWheelZoom: !1, dragging: i, zoomControl: i, touchZoom: i, doubleClickZoom: i, boxZoom: i, keyboard: i }).setView([t, l], 13);
+  a.tileLayer(s.tileUrl, { attribution: s.attribution, maxZoom: 19 }).addTo(o);
+  const d = a.marker([t, l], { icon: Xn(a), draggable: n }).addTo(o), u = typeof ResizeObserver == "function" ? new ResizeObserver(() => {
+    o.invalidateSize(), !i && e.clientWidth && (u == null || u.disconnect());
+  }) : null;
+  return u == null || u.observe(e), setTimeout(() => o.invalidateSize(), 0), {
+    map: o,
+    marker: d,
+    moveTo: (f, c) => {
+      d.setLatLng([f, c]), o.setView([f, c], Math.max(o.getZoom(), 13));
+    },
+    destroy: () => {
+      u == null || u.disconnect(), o.remove();
+    }
+  };
+}
+async function el(e, t, l = ge()) {
+  const n = { lat: parseFloat(e), lng: parseFloat(t) };
+  if (!Number.isFinite(n.lat) || !Number.isFinite(n.lng))
+    return null;
+  const i = document.createElement("div");
+  return i.className = "map-container bd-osm-map", await Qn(i, n.lat, n.lng, { interactive: !1, config: l }), i;
+}
+Promise.resolve();
+const tl = [
   { key: "address", label: "Address" },
   { key: "street", label: "Street" },
   { key: "street_number", label: "Nr." },
@@ -2471,78 +2530,80 @@ const Vn = (e) => e != null && e.base && typeof e.sd == "string" ? `${e.base}${e
   { key: "country", label: "Country" },
   { key: "lat", label: "Lat" },
   { key: "lng", label: "Lng" }
-], zn = (e) => {
-  const [t, l] = B(e), n = t !== null && typeof t == "object" ? t : {}, i = (s, c) => {
-    const d = { ...n, [s]: c }, u = Object.values(d).some((f) => f !== "" && f != null);
-    l(u ? d : null);
+], nl = (e) => {
+  const [t, l] = U(e), n = t !== null && typeof t == "object" ? t : {}, i = (s, a) => {
+    const o = { ...n, [s]: a }, d = Object.values(o).some((u) => u !== "" && u != null);
+    l(d ? o : null);
   };
-  return /* @__PURE__ */ w("div", { className: "bd-input bd-input-location", children: [
-    Kn.map(({ key: s, label: c }) => /* @__PURE__ */ w("label", { className: "bd-location-field", children: [
-      /* @__PURE__ */ r("span", { children: c }),
-      /* @__PURE__ */ r("input", { value: String(n[s] ?? ""), onChange: (d) => i(s, d.target.value) })
+  return /* @__PURE__ */ A("div", { className: "bd-input bd-input-location", children: [
+    tl.map(({ key: s, label: a }) => /* @__PURE__ */ A("label", { className: "bd-location-field", children: [
+      /* @__PURE__ */ r("span", { children: a }),
+      /* @__PURE__ */ r("input", { value: String(n[s] ?? ""), onChange: (o) => i(s, o.target.value) })
     ] }, s)),
     /* @__PURE__ */ r(P, { status: e.status })
   ] });
-}, Gn = oe({ serialize: z }), Wn = ({ value: e, config: t }) => {
-  const l = j(null), n = e == null ? void 0 : e.lat, i = e == null ? void 0 : e.lng, s = (t == null ? void 0 : t.apiKey) ?? (t == null ? void 0 : t.googleMapsApiKey);
+}, ll = oe({ serialize: K }), il = ({ value: e, config: t }) => {
+  const l = _(null), n = e == null ? void 0 : e.lat, i = e == null ? void 0 : e.lng, s = (t == null ? void 0 : t.apiKey) ?? (t == null ? void 0 : t.googleMapsApiKey);
   return L(() => {
-    if (!s || !n || !i || !l.current)
+    const a = t == null ? void 0 : t.openStreetMap;
+    if (!s && !a || !n || !i || !l.current)
       return;
-    let c = !1;
+    let o = !1;
     const d = l.current;
-    return Dt(String(n), String(i), s).then((u) => {
-      !c && u && d.replaceChildren(u);
+    return (s ? Bt(String(n), String(i), s) : el(String(n), String(i), ge(a))).then((u) => {
+      !o && u && d.replaceChildren(u);
+    }).catch(() => {
     }), () => {
-      c = !0, d.replaceChildren();
+      o = !0, d.replaceChildren();
     };
-  }, [n, i, s]), typeof e == "string" ? /* @__PURE__ */ r("p", { className: "bd-location", children: e }) : /* @__PURE__ */ w("div", { className: "bd-location", "data-lat": n, "data-lng": i, children: [
+  }, [n, i, s, t == null ? void 0 : t.openStreetMap]), typeof e == "string" ? /* @__PURE__ */ r("p", { className: "bd-location", children: e }) : /* @__PURE__ */ A("div", { className: "bd-location", "data-lat": n, "data-lng": i, children: [
     e != null && e.address ? /* @__PURE__ */ r("p", { className: "bd-location-address", children: e.address }) : null,
     /* @__PURE__ */ r("div", { ref: l, className: "bd-location-map" })
   ] });
-}, Zn = {
+}, sl = {
   type: "location",
   empty: (e) => !e,
-  Control: (e) => e.config.apiKey || e.value === null || typeof e.value == "object" ? /* @__PURE__ */ r(zn, { ...e }) : /* @__PURE__ */ r(Gn, { ...e }),
-  View: ({ value: e, config: t }) => /* @__PURE__ */ r(Wn, { value: e, config: t })
-}, Jn = /^<p id="[^"]*"><br><\/p>$/, qn = {
+  Control: (e) => e.config.apiKey || e.value === null || typeof e.value == "object" ? /* @__PURE__ */ r(nl, { ...e }) : /* @__PURE__ */ r(ll, { ...e }),
+  View: ({ value: e, config: t }) => /* @__PURE__ */ r(il, { value: e, config: t })
+}, al = /^<p id="[^"]*"><br><\/p>$/, rl = {
   type: "htmlText",
   empty: (e) => !e,
-  Control: fe((e) => z(Jn.test(e) ? "" : e)),
+  Control: fe((e) => K(al.test(e) ? "" : e)),
   // stored HTML is trusted app content, same rule as the vanilla read path
   View: ({ value: e }) => /* @__PURE__ */ r("div", { className: "bd-html", dangerouslySetInnerHTML: { __html: String(e ?? "") } })
-}, Hn = [
-  Rt,
-  Ut,
-  Pt,
-  qt,
+}, cl = [
   Ht,
-  Yt,
+  Jt,
+  qt,
+  ln,
+  sn,
   an,
-  rn,
-  cn,
-  on,
-  dn,
-  un,
-  gn,
+  mn,
   hn,
   bn,
   yn,
+  vn,
   pn,
-  Cn,
   Nn,
+  wn,
+  Sn,
   $n,
-  Tn,
+  On,
+  Mn,
+  En,
   In,
-  Dn,
-  Bn,
-  Rn,
   Un,
+  Rn,
   Pn,
-  Zn,
-  qn
+  Wn,
+  Hn,
+  Jn,
+  qn,
+  sl,
+  rl
 ];
-const Yn = ({ value: e }) => /* @__PURE__ */ r("span", { className: "bd-fallback", children: typeof e == "object" ? JSON.stringify(e) : String(e) });
-class Qn extends $t {
+const ol = ({ value: e }) => /* @__PURE__ */ r("span", { className: "bd-fallback", children: typeof e == "object" ? JSON.stringify(e) : String(e) });
+class dl extends Lt {
   constructor() {
     super(...arguments);
     V(this, "state", { failed: !1 });
@@ -2557,7 +2618,7 @@ class Qn extends $t {
     return this.state.failed ? null : this.props.children;
   }
 }
-const Xn = (e) => (l) => {
+const ul = (e) => (l) => {
   const n = l.value;
   return /* @__PURE__ */ r(
     e,
@@ -2567,8 +2628,8 @@ const Xn = (e) => (l) => {
       onChange: (i) => l.onChange(i == null || i === "" ? null : { op: "contains", value: i })
     }
   );
-}, el = (e) => e.value !== null && e.value !== void 0 && typeof e.value == "object" ? "json" : e.kind === "draft" ? "varchar" : "text";
-function tl(e, t, l, n) {
+}, fl = (e) => e.value !== null && e.value !== void 0 && typeof e.value == "object" ? "json" : e.kind === "draft" ? "varchar" : "text";
+function gl(e, t, l, n) {
   const i = t.config.resolve(e.type, e.model, e.name, l.defaultConfig, e.mountConfig);
   return i.multiple === void 0 && e.many && (i.multiple = !0), {
     value: e.value,
@@ -2585,96 +2646,96 @@ function tl(e, t, l, n) {
     services: e.services ?? t.services
   };
 }
-const nl = ({ View: e, props: t, empty: l }) => {
+const ml = ({ View: e, props: t, empty: l }) => {
   var i;
-  const [n] = B(t);
+  const [n] = U(t);
   return l(n) ? (i = t.config) != null && i.emptyMsg ? /* @__PURE__ */ r("span", { className: "bd-empty", children: t.config.emptyMsg }) : null : /* @__PURE__ */ r(e, { value: n, attributeDetails: t.attributeDetails, config: t.config, settings: t.settings });
-}, Q = ({ attribute: e, port: t, mode: l = "write", use: n, config: i, label: s, className: c }) => {
-  const d = J(), [u, f] = A(null), [o, a] = A(8), h = i ? JSON.stringify(i) : "", m = U(() => t ? i ? { ...t, mountConfig: { ...t.mountConfig, ...i } } : t : Tt(e, i), [e, t, h]), b = U(() => n && typeof n == "object" ? ae(n) : n, [n]), v = U(() => d.registry.resolve(
-    { type: m.type, many: m.many, model: m.model, name: m.name, hint: m.hint, use: b, maxLayer: o },
-    d.debug ? (T) => console.info(`[BlitzUIManagerReact] ${T}`) : void 0
-  ), [d, m, b, o]), N = U(() => tl(m, d, v, f), [m, d, v]), O = () => {
+}, Q = ({ attribute: e, port: t, mode: l = "write", use: n, config: i, label: s, className: a }) => {
+  const o = H(), [d, u] = w(null), [f, c] = w(8), b = i ? JSON.stringify(i) : "", m = R(() => t ? i ? { ...t, mountConfig: { ...t.mountConfig, ...i } } : t : Rt(e, i), [e, t, b]), h = R(() => n && typeof n == "object" ? ae(n) : n, [n]), v = R(() => o.registry.resolve(
+    { type: m.type, many: m.many, model: m.model, name: m.name, hint: m.hint, use: h, maxLayer: f },
+    o.debug ? (T) => console.info(`[BlitzUIManagerReact] ${T}`) : void 0
+  ), [o, m, h, f]), N = R(() => gl(m, o, v, u), [m, o, v]), O = () => {
     var D;
     const T = l === "read" ? "view" : l === "filter" ? "filter" : "control", M = ((D = v.sources[T]) == null ? void 0 : D.layer) ?? 0;
-    a(M - 1);
+    c(M - 1);
   };
   let S = null;
   if (l === "read") {
-    const T = v.view ?? Yn, M = v.empty ?? kt;
-    S = /* @__PURE__ */ r(nl, { View: T, props: N, empty: M });
+    const T = v.view ?? ol, M = v.empty ?? Ft;
+    S = /* @__PURE__ */ r(ml, { View: T, props: N, empty: M });
   } else if (l === "filter") {
     let T = v.filter;
-    if (!T && v.control && et.has(m.type) && (T = Xn(v.control)), !T)
+    if (!T && v.control && at.has(m.type) && (T = ul(v.control)), !T)
       return null;
     S = /* @__PURE__ */ r(T, { ...N });
   } else {
     let T = v.control;
     if (!T) {
-      const M = el(m);
-      M !== m.type && (d.warn(`No usable UI for type '${m.type}' — falling back to '${M}'`), T = d.registry.resolve({ type: M, model: m.model, name: m.name, maxLayer: 0 }).control);
+      const M = fl(m);
+      M !== m.type && (o.warn(`No usable UI for type '${m.type}' — falling back to '${M}'`), T = o.registry.resolve({ type: M, model: m.model, name: m.name, maxLayer: 0 }).control);
     }
     if (!T)
-      return d.warn(`Editor for type '${m.type}' not supported`), null;
+      return o.warn(`Editor for type '${m.type}' not supported`), null;
     S = /* @__PURE__ */ r(T, { ...N });
   }
-  const $ = s === !0 ? X(N.attributeDetails["label-int"], N.attributeDetails.label, d.settings.language ?? "en", m.name) : s;
-  return /* @__PURE__ */ w("div", { className: `bd-field bd-field-${m.type}${c ? ` ${c}` : ""}`, children: [
+  const $ = s === !0 ? q(N.attributeDetails["label-int"], N.attributeDetails.label, o.settings.language ?? "en", m.name) : s;
+  return /* @__PURE__ */ A("div", { className: `bd-field bd-field-${m.type}${a ? ` ${a}` : ""}`, children: [
     $ ? /* @__PURE__ */ r("label", { className: "bd-field-label", children: $ }) : null,
-    /* @__PURE__ */ r(Qn, { onError: O, children: S }, `${l}-${o}`),
-    u ? /* @__PURE__ */ r("p", { className: "bd-invalid-msg", children: u }) : null
+    /* @__PURE__ */ r(dl, { onError: O, children: S }, `${l}-${f}`),
+    d ? /* @__PURE__ */ r("p", { className: "bd-invalid-msg", children: d }) : null
   ] });
 };
-function ge(e) {
-  const t = J(), l = typeof e == "string", [n, i] = A(l ? null : e);
+function me(e) {
+  const t = H(), l = typeof e == "string", [n, i] = w(l ? null : e);
   return L(() => {
     if (!l) {
       i(e);
       return;
     }
     let s = !1;
-    return t.resolveModel(e).then((c) => {
-      s || i(c);
-    }).catch((c) => t.warn(`model '${e}' failed to resolve: ${(c == null ? void 0 : c.message) ?? c}`)), () => {
+    return t.resolveModel(e).then((a) => {
+      s || i(a);
+    }).catch((a) => t.warn(`model '${e}' failed to resolve: ${(a == null ? void 0 : a.message) ?? a}`)), () => {
       s = !0;
     };
   }, [e, l, t]), n;
 }
-function ll(e, t) {
+function hl(e, t) {
   var n;
   if (t)
     return t;
   const l = ((n = e == null ? void 0 : e.getAttributesDetails) == null ? void 0 : n.call(e)) ?? {};
   return Object.keys(l).filter((i) => !i.startsWith("_") && !i.startsWith("@"));
 }
-const gl = (e) => {
+const $l = (e) => {
   var N, O, S;
-  const t = J(), l = ge(e.model), n = j({}), [i, s] = A(null), [c, d] = A(!1), [u, f] = A(!1), o = U(() => ll(l, e.attributes), [l, e.attributes]), a = U(() => {
+  const t = H(), l = me(e.model), n = _({}), [i, s] = w(null), [a, o] = w(!1), [d, u] = w(!1), f = R(() => hl(l, e.attributes), [l, e.attributes]), c = R(() => {
     var T;
     if (!l)
       return [];
     const $ = ((T = l.getAttributesDetails) == null ? void 0 : T.call(l)) ?? {};
-    return o.map((M) => {
+    return f.map((M) => {
       var y, E;
-      const D = $[M] ?? {}, x = Lt(n.current, M, D, l, e.config), F = t.registry.resolve({ type: x.type, many: x.many, model: x.model, name: M, hint: x.hint }), C = ((y = e.presetValues) == null ? void 0 : y[M]) ?? D.default ?? ((E = F.default) == null ? void 0 : E.call(F));
+      const D = $[M] ?? {}, x = Pt(n.current, M, D, l, e.config), F = t.registry.resolve({ type: x.type, many: x.many, model: x.model, name: M, hint: x.hint }), C = ((y = e.presetValues) == null ? void 0 : y[M]) ?? D.default ?? ((E = F.default) == null ? void 0 : E.call(F));
       return C !== void 0 && n.current[M] === void 0 && (n.current[M] = C), { ...x, value: n.current[M] };
     });
-  }, [l, o]);
+  }, [l, f]);
   if (L(() => () => {
     n.current = {};
   }, [l]), !l)
     return /* @__PURE__ */ r("div", { className: "bd-addform bd-loading", children: "Loading…" });
-  const h = ((N = l.getAttributesDetails) == null ? void 0 : N.call(l)) ?? {}, m = t.settings.language ?? "en", b = ($) => {
+  const b = ((N = l.getAttributesDetails) == null ? void 0 : N.call(l)) ?? {}, m = t.settings.language ?? "en", h = ($) => {
     var T, M;
-    return X((T = h[$]) == null ? void 0 : T["label-int"], (M = h[$]) == null ? void 0 : M.label, m, $);
+    return q((T = b[$]) == null ? void 0 : T["label-int"], (M = b[$]) == null ? void 0 : M.label, m, $);
   }, v = async () => {
     var M, D, x;
     s(null);
-    const T = (e.requireAll ? o : e.requiredAttributes ?? []).filter((F) => n.current[F] == null);
+    const T = (e.requireAll ? f : e.requiredAttributes ?? []).filter((F) => n.current[F] == null);
     if (T.length) {
-      s(`Missing required fields: ${T.map(b).join(", ")}`);
+      s(`Missing required fields: ${T.map(h).join(", ")}`);
       return;
     }
-    d(!0);
+    o(!0);
     try {
       const F = await ((M = e.beforeSubmit) == null ? void 0 : M.call(e, { ...n.current }));
       if (F) {
@@ -2687,169 +2748,169 @@ const gl = (e) => {
         return;
       }
       (D = e.onSuccess) == null || D.call(e, C), e.onServerSuccess && ((x = C.addEventListener) == null || x.call(C, "syncStatusChange", (y) => {
-        var E, _;
-        (y == null ? void 0 : y.status) === "completed" ? (E = e.onServerSuccess) == null || E.call(e, C) : (y == null ? void 0 : y.status) === "failed" && s(((_ = y == null ? void 0 : y.job) == null ? void 0 : _.message) ?? "Saving failed");
-      })), f(!0);
+        var E, j;
+        (y == null ? void 0 : y.status) === "completed" ? (E = e.onServerSuccess) == null || E.call(e, C) : (y == null ? void 0 : y.status) === "failed" && s(((j = y == null ? void 0 : y.job) == null ? void 0 : j.message) ?? "Saving failed");
+      })), u(!0);
     } catch (F) {
       s((F == null ? void 0 : F.message) ?? "An unexpected error occurred!");
     } finally {
-      d(!1);
+      o(!1);
     }
   };
-  return u ? /* @__PURE__ */ r("div", { className: `bd-addform ${((O = l.getName) == null ? void 0 : O.call(l)) ?? ""}`, children: /* @__PURE__ */ r("p", { className: "success-msg", children: e.successMessage ?? "Added successfully." }) }) : /* @__PURE__ */ w("div", { className: `bd-addform ${((S = l.getName) == null ? void 0 : S.call(l)) ?? ""}`, children: [
-    a.map(($) => /* @__PURE__ */ r(
+  return d ? /* @__PURE__ */ r("div", { className: `bd-addform ${((O = l.getName) == null ? void 0 : O.call(l)) ?? ""}`, children: /* @__PURE__ */ r("p", { className: "success-msg", children: e.successMessage ?? "Added successfully." }) }) : /* @__PURE__ */ A("div", { className: `bd-addform ${((S = l.getName) == null ? void 0 : S.call(l)) ?? ""}`, children: [
+    c.map(($) => /* @__PURE__ */ r(
       Q,
       {
         port: $,
         mode: "write",
-        label: e.withLabels ? b($.name) : void 0
+        label: e.withLabels ? h($.name) : void 0
       },
       $.name
     )),
     i ? /* @__PURE__ */ r("p", { className: "bd-invalid-msg", children: i }) : null,
-    /* @__PURE__ */ r("button", { type: "button", className: "add-btn", disabled: c, onClick: () => void v(), children: c ? "…" : e.addButtonLabel ?? "Add" })
+    /* @__PURE__ */ r("button", { type: "button", className: "add-btn", disabled: a, onClick: () => void v(), children: a ? "…" : e.addButtonLabel ?? "Add" })
   ] });
-}, Ye = (e) => e != null && typeof e == "object" && "_attributes" in e, hl = ({ src: e, attributes: t, withLabels: l, use: n, config: i }) => {
-  var u;
-  const s = J(), c = U(() => Array.isArray(e) ? e : Ye(e) ? (t ?? Object.keys(e._attributes ?? {}).filter((o) => !o.startsWith("_") && !o.startsWith("@")).filter((o) => {
-    var a;
-    return ((a = e[o]) == null ? void 0 : a.value) !== void 0;
-  })).map((o) => e[o]).filter(Boolean) : e == null ? [] : [e], [e, t]), d = s.settings.language ?? "en";
-  return /* @__PURE__ */ r("div", { className: `bd-object-editor${Ye(e) ? ` ${((u = e._blitzID) == null ? void 0 : u.value) ?? ""}` : ""}`, children: c.map((f) => {
-    var a, h, m, b;
-    const o = ((b = (m = (h = (a = f._object) == null ? void 0 : a.model) == null ? void 0 : h.getAttributesDetails) == null ? void 0 : m.call(h)) == null ? void 0 : b[f._name]) ?? {};
+}, lt = (e) => e != null && typeof e == "object" && "_attributes" in e, kl = ({ src: e, attributes: t, withLabels: l, use: n, config: i }) => {
+  var d;
+  const s = H(), a = R(() => Array.isArray(e) ? e : lt(e) ? (t ?? Object.keys(e._attributes ?? {}).filter((f) => !f.startsWith("_") && !f.startsWith("@")).filter((f) => {
+    var c;
+    return ((c = e[f]) == null ? void 0 : c.value) !== void 0;
+  })).map((f) => e[f]).filter(Boolean) : e == null ? [] : [e], [e, t]), o = s.settings.language ?? "en";
+  return /* @__PURE__ */ r("div", { className: `bd-object-editor${lt(e) ? ` ${((d = e._blitzID) == null ? void 0 : d.value) ?? ""}` : ""}`, children: a.map((u) => {
+    var c, b, m, h;
+    const f = ((h = (m = (b = (c = u._object) == null ? void 0 : c.model) == null ? void 0 : b.getAttributesDetails) == null ? void 0 : m.call(b)) == null ? void 0 : h[u._name]) ?? {};
     return /* @__PURE__ */ r(
       Q,
       {
-        attribute: f,
+        attribute: u,
         mode: "write",
         use: n,
         config: i,
-        label: l ? X(o["label-int"], o.label, d, f._name) : void 0
+        label: l ? q(f["label-int"], f.label, o, u._name) : void 0
       },
-      f._name
+      u._name
     );
   }) });
-}, il = ({ object: e, attributes: t, withLabels: l, config: n }) => {
-  var u, f, o, a, h, m;
-  const i = J(), s = U(() => (t ?? Object.keys((e == null ? void 0 : e._attributes) ?? {})).filter((v) => !v.startsWith("_") && !v.startsWith("@")).filter((v) => {
+}, bl = ({ object: e, attributes: t, withLabels: l, config: n }) => {
+  var d, u, f, c, b, m;
+  const i = H(), s = R(() => (t ?? Object.keys((e == null ? void 0 : e._attributes) ?? {})).filter((v) => !v.startsWith("_") && !v.startsWith("@")).filter((v) => {
     var N;
     return ((N = e == null ? void 0 : e[v]) == null ? void 0 : N.value) !== void 0;
   }), [e, t]);
   if (!e)
     return null;
-  const c = ((o = (f = (u = e._object) == null ? void 0 : u.model) == null ? void 0 : f.getAttributesDetails) == null ? void 0 : o.call(f)) ?? ((h = (a = e.model) == null ? void 0 : a.getAttributesDetails) == null ? void 0 : h.call(a)) ?? {}, d = i.settings.language ?? "en";
-  return /* @__PURE__ */ r("div", { className: `bd-objectview ${((m = e._blitzID) == null ? void 0 : m.value) ?? ""}`, children: s.map((b) => {
+  const a = ((f = (u = (d = e._object) == null ? void 0 : d.model) == null ? void 0 : u.getAttributesDetails) == null ? void 0 : f.call(u)) ?? ((b = (c = e.model) == null ? void 0 : c.getAttributesDetails) == null ? void 0 : b.call(c)) ?? {}, o = i.settings.language ?? "en";
+  return /* @__PURE__ */ r("div", { className: `bd-objectview ${((m = e._blitzID) == null ? void 0 : m.value) ?? ""}`, children: s.map((h) => {
     var v, N;
     return /* @__PURE__ */ r(
       Q,
       {
-        attribute: e[b],
+        attribute: e[h],
         mode: "read",
         config: n,
-        label: l ? X((v = c[b]) == null ? void 0 : v["label-int"], (N = c[b]) == null ? void 0 : N.label, d, b) : void 0
+        label: l ? q((v = a[h]) == null ? void 0 : v["label-int"], (N = a[h]) == null ? void 0 : N.label, o, h) : void 0
       },
-      b
+      h
     );
   }) });
 };
-function sl(e, t) {
-  const [l, n] = A([]), [i, s] = A(!1), c = t ? JSON.stringify(t) : "";
+function yl(e, t) {
+  const [l, n] = w([]), [i, s] = w(!1), a = t ? JSON.stringify(t) : "";
   return L(() => {
     if (!e)
       return;
     s(!1);
-    const d = e.subscribeToList(t, (u) => {
-      n([...u.items ?? []]), u.nextSource || s(!0);
+    const o = e.subscribeToList(t, (d) => {
+      n([...d.items ?? []]), d.nextSource || s(!0);
     }, !0);
     return () => {
-      d == null || d();
+      o == null || o();
     };
-  }, [e, c]), { items: l, settled: i };
+  }, [e, a]), { items: l, settled: i };
 }
-const ml = (e) => {
-  var o;
-  const t = ge(e.model), { items: l, settled: n } = sl(t, e.options), [i, s] = A(1), c = e.objectsPerPage ?? 10, d = U(() => {
-    let a = e.filter ? l.filter(e.filter) : [...l];
-    return e.sort && a.sort(e.sort), a;
+const Ol = (e) => {
+  var f;
+  const t = me(e.model), { items: l, settled: n } = yl(t, e.options), [i, s] = w(1), a = e.objectsPerPage ?? 10, o = R(() => {
+    let c = e.filter ? l.filter(e.filter) : [...l];
+    return e.sort && c.sort(e.sort), c;
   }, [l, e.filter, e.sort]);
   L(() => {
     s(1);
   }, [e.filter]);
-  const u = e.pagination ? Math.max(1, Math.ceil(d.length / c)) : 1, f = e.pagination ? d.slice((i - 1) * c, i * c) : d;
-  return !n && l.length === 0 ? /* @__PURE__ */ r("div", { className: "bd-list bd-loading", children: e.loading ?? /* @__PURE__ */ r("span", { className: "spinner", children: "Loading…" }) }) : /* @__PURE__ */ w("div", { className: `bd-list ${((o = t == null ? void 0 : t.getName) == null ? void 0 : o.call(t)) ?? ""}`, children: [
-    d.length === 0 && n ? /* @__PURE__ */ r("p", { className: "bd-list-empty", children: e.noResultsMessage ?? "No results." }) : f.map((a) => {
-      var h, m;
+  const d = e.pagination ? Math.max(1, Math.ceil(o.length / a)) : 1, u = e.pagination ? o.slice((i - 1) * a, i * a) : o;
+  return !n && l.length === 0 ? /* @__PURE__ */ r("div", { className: "bd-list bd-loading", children: e.loading ?? /* @__PURE__ */ r("span", { className: "spinner", children: "Loading…" }) }) : /* @__PURE__ */ A("div", { className: `bd-list ${((f = t == null ? void 0 : t.getName) == null ? void 0 : f.call(t)) ?? ""}`, children: [
+    o.length === 0 && n ? /* @__PURE__ */ r("p", { className: "bd-list-empty", children: e.noResultsMessage ?? "No results." }) : u.map((c) => {
+      var b, m;
       return /* @__PURE__ */ r(
         "div",
         {
-          className: `card ${((h = a._blitzID) == null ? void 0 : h.value) ?? ""}`,
-          onClick: e.onObjectClick ? () => e.onObjectClick(a) : void 0,
-          children: e.renderRow ? e.renderRow(a) : /* @__PURE__ */ r(il, { object: a, attributes: e.attributes, withLabels: e.withLabels })
+          className: `card ${((b = c._blitzID) == null ? void 0 : b.value) ?? ""}`,
+          onClick: e.onObjectClick ? () => e.onObjectClick(c) : void 0,
+          children: e.renderRow ? e.renderRow(c) : /* @__PURE__ */ r(bl, { object: c, attributes: e.attributes, withLabels: e.withLabels })
         },
-        (m = a._blitzID) == null ? void 0 : m.value
+        (m = c._blitzID) == null ? void 0 : m.value
       );
     }),
-    e.pagination && u > 1 ? /* @__PURE__ */ r("div", { className: "bd-list-pagination", children: Array.from({ length: u }, (a, h) => h + 1).map((a) => /* @__PURE__ */ r(
+    e.pagination && d > 1 ? /* @__PURE__ */ r("div", { className: "bd-list-pagination", children: Array.from({ length: d }, (c, b) => b + 1).map((c) => /* @__PURE__ */ r(
       "button",
       {
         type: "button",
-        className: a === i ? "active" : "",
-        onClick: () => s(a),
-        children: a
+        className: c === i ? "active" : "",
+        onClick: () => s(c),
+        children: c
       },
-      a
+      c
     )) }) : null
   ] });
-}, al = [
+}, vl = [
   { attribute: "_blitzstamp", label: "Newest", order: "desc" },
   { attribute: "_blitzstamp", label: "Oldest", order: "asc" }
-], rl = (e, t) => {
+], pl = (e, t) => {
   const l = t === "desc" ? -1 : 1;
   return (n, i) => {
-    var u, f;
-    const s = (u = n[e]) == null ? void 0 : u.value, c = (f = i[e]) == null ? void 0 : f.value;
-    return s == null || c == null ? s == null && c == null ? 0 : s == null ? l : -l : (typeof s == "number" && typeof c == "number" ? s - c : String(s).localeCompare(String(c))) * l;
+    var d, u;
+    const s = (d = n[e]) == null ? void 0 : d.value, a = (u = i[e]) == null ? void 0 : u.value;
+    return s == null || a == null ? s == null && a == null ? 0 : s == null ? l : -l : (typeof s == "number" && typeof a == "number" ? s - a : String(s).localeCompare(String(a))) * l;
   };
-}, bl = (e) => {
+}, Ml = (e) => {
   var x, F, C;
-  const t = J(), l = ge(e.model), [n, i] = A(""), [s, c] = A(!1), d = j({}), u = j(""), { onFilterChange: f } = e, o = Z(() => {
-    const y = Xe(d.current), E = u.current.trim(), _ = e.searchAttributes ?? [], K = E && _.length ? (q) => {
-      const ne = new RegExp(Ae(E), "i");
-      return _.some((H) => {
+  const t = H(), l = me(e.model), [n, i] = w(""), [s, a] = w(!1), o = _({}), d = _(""), { onFilterChange: u } = e, f = Z(() => {
+    const y = st(o.current), E = d.current.trim(), j = e.searchAttributes ?? [], z = E && j.length ? (J) => {
+      const ne = new RegExp($e(E), "i");
+      return j.some((Y) => {
         var le;
-        return typeof ((le = q[H]) == null ? void 0 : le.value) == "string" && ne.test(q[H].value);
+        return typeof ((le = J[Y]) == null ? void 0 : le.value) == "string" && ne.test(J[Y].value);
       });
     } : null;
-    f(!y && !K ? null : (q) => (!K || K(q)) && (!y || y(q)));
-  }, [f, (x = e.searchAttributes) == null ? void 0 : x.join(",")]);
+    u(!y && !z ? null : (J) => (!z || z(J)) && (!y || y(J)));
+  }, [u, (x = e.searchAttributes) == null ? void 0 : x.join(",")]);
   L(() => {
-    u.current = n;
-    const y = setTimeout(o, n ? 300 : 0);
+    d.current = n;
+    const y = setTimeout(f, n ? 300 : 0);
     return () => clearTimeout(y);
-  }, [n, o]);
-  const a = e.sortAttributes ?? al, [h, m] = A(0), { onSortChange: b } = e;
+  }, [n, f]);
+  const c = e.sortAttributes ?? vl, [b, m] = w(0), { onSortChange: h } = e;
   L(() => {
-    if (!b)
+    if (!h)
       return;
-    const y = a[h];
-    b(h === 0 ? null : rl(y.attribute, y.order));
-  }, [h, b]);
+    const y = c[b];
+    h(b === 0 ? null : pl(y.attribute, y.order));
+  }, [b, h]);
   const v = Z((y) => {
-    var _;
+    var j;
     if (!l)
       return [];
-    const E = ((_ = l.getAttributesDetails) == null ? void 0 : _.call(l)) ?? {};
-    return y.map((K) => Qe(d.current, K, E[K] ?? {}, l, o));
-  }, [l, o]), N = U(() => v(e.filterAttributes ?? []), [v, e.filterAttributes]), O = U(() => v(e.dialogFilterAttributes ?? []), [v, e.dialogFilterAttributes]), S = () => {
-    for (const y of Object.keys(d.current))
-      delete d.current[y];
-    i(""), c(!1), o();
+    const E = ((j = l.getAttributesDetails) == null ? void 0 : j.call(l)) ?? {};
+    return y.map((z) => it(o.current, z, E[z] ?? {}, l, f));
+  }, [l, f]), N = R(() => v(e.filterAttributes ?? []), [v, e.filterAttributes]), O = R(() => v(e.dialogFilterAttributes ?? []), [v, e.dialogFilterAttributes]), S = () => {
+    for (const y of Object.keys(o.current))
+      delete o.current[y];
+    i(""), a(!1), f();
   }, $ = ((F = l == null ? void 0 : l.getAttributesDetails) == null ? void 0 : F.call(l)) ?? {}, T = t.settings.language ?? "en", M = (y) => {
-    var E, _;
-    return X((E = $[y]) == null ? void 0 : E["label-int"], (_ = $[y]) == null ? void 0 : _.label, T, y);
-  }, D = n.trim() !== "" || Object.keys(d.current).length > 0;
-  return /* @__PURE__ */ w("div", { className: "bd-searchbox", children: [
+    var E, j;
+    return q((E = $[y]) == null ? void 0 : E["label-int"], (j = $[y]) == null ? void 0 : j.label, T, y);
+  }, D = n.trim() !== "" || Object.keys(o.current).length > 0;
+  return /* @__PURE__ */ A("div", { className: "bd-searchbox", children: [
     (C = e.searchAttributes) != null && C.length ? /* @__PURE__ */ r(
       "input",
       {
@@ -2861,54 +2922,54 @@ const ml = (e) => {
       }
     ) : null,
     N.length ? /* @__PURE__ */ r("div", { className: "bd-searchbox-filters", children: N.map((y) => /* @__PURE__ */ r(Q, { port: y, mode: "filter", label: e.withLabels ? M(y.name) : void 0 }, y.name)) }) : null,
-    /* @__PURE__ */ w("div", { className: "bd-searchbox-actions", children: [
-      e.onSortChange && a.length ? /* @__PURE__ */ r(
+    /* @__PURE__ */ A("div", { className: "bd-searchbox-actions", children: [
+      e.onSortChange && c.length ? /* @__PURE__ */ r(
         "select",
         {
           className: "bd-searchbox-sort",
-          value: h,
+          value: b,
           onChange: (y) => m(Number(y.target.value)),
-          children: a.map((y, E) => /* @__PURE__ */ r("option", { value: E, children: y.label }, E))
+          children: c.map((y, E) => /* @__PURE__ */ r("option", { value: E, children: y.label }, E))
         }
       ) : null,
-      O.length ? /* @__PURE__ */ r("button", { type: "button", className: "bd-searchbox-filters-btn", onClick: () => c(!0), children: e.filtersButtonLabel ?? "Filters" }) : null,
+      O.length ? /* @__PURE__ */ r("button", { type: "button", className: "bd-searchbox-filters-btn", onClick: () => a(!0), children: e.filtersButtonLabel ?? "Filters" }) : null,
       D ? /* @__PURE__ */ r("button", { type: "button", className: "bd-searchbox-clear", onClick: S, children: e.clearFiltersLabel ?? "Clear" }) : null
     ] }),
-    s ? /* @__PURE__ */ r("div", { className: "bd-filters-dialog", role: "dialog", "aria-modal": "true", children: /* @__PURE__ */ w("div", { className: "bd-filters-dialog-box", children: [
-      /* @__PURE__ */ w("header", { children: [
+    s ? /* @__PURE__ */ r("div", { className: "bd-filters-dialog", role: "dialog", "aria-modal": "true", children: /* @__PURE__ */ A("div", { className: "bd-filters-dialog-box", children: [
+      /* @__PURE__ */ A("header", { children: [
         /* @__PURE__ */ r("h3", { children: e.dialogTitle ?? "Filters" }),
-        /* @__PURE__ */ r("button", { type: "button", className: "close-btn", onClick: () => c(!1), children: "×" })
+        /* @__PURE__ */ r("button", { type: "button", className: "close-btn", onClick: () => a(!1), children: "×" })
       ] }),
       O.map((y) => /* @__PURE__ */ r(Q, { port: y, mode: "filter", label: e.withLabels ? M(y.name) : void 0 }, y.name)),
-      /* @__PURE__ */ r("footer", { children: /* @__PURE__ */ r("button", { type: "button", onClick: () => c(!1), children: "Done" }) })
+      /* @__PURE__ */ r("footer", { children: /* @__PURE__ */ r("button", { type: "button", onClick: () => a(!1), children: "Done" }) })
     ] }) }) : null
   ] });
-}, yl = (e) => {
-  var Oe, Me, Ee, Te, Le, Fe, Ie, De, xe, _e;
-  const t = J(), l = ge(e.model), n = j({}), [i, s] = A(""), c = j(""), [d, u] = A(null), f = ((Me = (Oe = e.sort) == null ? void 0 : Oe.options[0]) == null ? void 0 : Me.value) ?? null, [o, a] = A(((Ee = e.sort) == null ? void 0 : Ee.value) ?? f), [h, m] = A(0), [b, v] = A({}), N = j(!1);
+}, El = (e) => {
+  var Te, Le, Fe, Ie, De, xe, je, _e, Ue, Ve;
+  const t = H(), l = me(e.model), n = _({}), [i, s] = w(""), a = _(""), [o, d] = w(null), u = ((Le = (Te = e.sort) == null ? void 0 : Te.options[0]) == null ? void 0 : Le.value) ?? null, [f, c] = w(((Fe = e.sort) == null ? void 0 : Fe.value) ?? u), [b, m] = w(0), [h, v] = w({}), N = _(!1);
   if (!N.current) {
     N.current = !0;
     for (const [g, p] of Object.entries(e.defaults ?? {}))
       n.current[g] = JSON.parse(JSON.stringify(p));
   }
-  const O = ((Te = l == null ? void 0 : l.getAttributesDetails) == null ? void 0 : Te.call(l)) ?? {}, S = ((Le = l == null ? void 0 : l.getSystemAttributesDetails) == null ? void 0 : Le.call(l)) ?? {}, $ = (g) => {
+  const O = ((Ie = l == null ? void 0 : l.getAttributesDetails) == null ? void 0 : Ie.call(l)) ?? {}, S = ((De = l == null ? void 0 : l.getSystemAttributesDetails) == null ? void 0 : De.call(l)) ?? {}, $ = (g) => {
     var p;
     return O[g] ?? ((p = e.filterAttributes) != null && p.includes(g) ? S[g] : void 0);
   }, T = t.settings.language ?? "en", M = (g) => {
     var p, k, I;
-    return ((p = e.labels) == null ? void 0 : p[g]) ?? X((k = $(g)) == null ? void 0 : k["label-int"], (I = $(g)) == null ? void 0 : I.label, T, g);
+    return ((p = e.labels) == null ? void 0 : p[g]) ?? q((k = $(g)) == null ? void 0 : k["label-int"], (I = $(g)) == null ? void 0 : I.label, T, g);
   }, { onFilterChange: D, onActiveChange: x } = e, F = Z(() => {
-    const g = Xe(n.current), p = c.current.trim(), k = e.searchAttributes ?? [], I = p && k.length ? (R) => {
-      const G = new RegExp(Ae(p), "i");
+    const g = st(n.current), p = a.current.trim(), k = e.searchAttributes ?? [], I = p && k.length ? (B) => {
+      const G = new RegExp($e(p), "i");
       return k.some((W) => {
         var se;
-        return typeof ((se = R[W]) == null ? void 0 : se.value) == "string" && G.test(R[W].value);
+        return typeof ((se = B[W]) == null ? void 0 : se.value) == "string" && G.test(B[W].value);
       });
     } : null;
-    D(!g && !I ? null : (R) => (!I || I(R)) && (!g || g(R))), m((R) => R + 1);
-  }, [D, (Fe = e.searchAttributes) == null ? void 0 : Fe.join(",")]);
+    D(!g && !I ? null : (B) => (!I || I(B)) && (!g || g(B))), m((B) => B + 1);
+  }, [D, (xe = e.searchAttributes) == null ? void 0 : xe.join(",")]);
   L(() => {
-    c.current = i;
+    a.current = i;
     const g = setTimeout(F, i ? 300 : 0);
     return () => clearTimeout(g);
   }, [i, F]);
@@ -2917,35 +2978,35 @@ const ml = (e) => {
       return !g && !p;
     if (g.op !== p.op)
       return !1;
-    const k = (G) => Array.isArray(G.values) ? G.values.map(String).sort() : null, I = k(g), R = k(p);
-    return I || R ? !!I && !!R && I.length === R.length && I.every((G, W) => G === R[W]) : g.value === p.value && g.min === p.min && g.max === p.max;
-  }, y = e.defaults ?? {}, E = i.trim() !== "" || [.../* @__PURE__ */ new Set([...Object.keys(n.current), ...Object.keys(y)])].some((g) => !C(n.current[g], y[g])) || o !== f;
+    const k = (G) => Array.isArray(G.values) ? G.values.map(String).sort() : null, I = k(g), B = k(p);
+    return I || B ? !!I && !!B && I.length === B.length && I.every((G, W) => G === B[W]) : g.value === p.value && g.min === p.min && g.max === p.max;
+  }, y = e.defaults ?? {}, E = i.trim() !== "" || [.../* @__PURE__ */ new Set([...Object.keys(n.current), ...Object.keys(y)])].some((g) => !C(n.current[g], y[g])) || f !== u;
   L(() => {
     x == null || x(E);
   }, [E, x]);
-  const _ = (e.searchAttributes ?? []).filter((g) => {
+  const j = (e.searchAttributes ?? []).filter((g) => {
     var p;
     return typeof ((p = $(g)) == null ? void 0 : p.type) == "string" && ["varchar", "text"].includes($(g).type);
-  }), K = (g) => Qe(n.current, g, $(g) ?? {}, l, F, { placeholder: `${M(g)}...` }), q = (g) => {
+  }), z = (g) => it(n.current, g, $(g) ?? {}, l, F, { placeholder: `${M(g)}...` }), J = (g) => {
     const p = t.registry.resolve({ type: g.type, many: g.many, model: g.model, name: g.name, hint: g.hint });
-    return !!(p.filter || p.control && et.has(g.type));
-  }, ne = (e.filterAttributes ?? []).filter((g) => $(g) && !_.includes(g) && q(K(g))), H = ne.map((g) => {
+    return !!(p.filter || p.control && at.has(g.type));
+  }, ne = (e.filterAttributes ?? []).filter((g) => $(g) && !j.includes(g) && J(z(g))), Y = ne.map((g) => {
     const p = n.current[g], k = (p == null ? void 0 : p.values) ?? [];
     return k.length === 1 ? `${g}:${k[0]}` : null;
   }).filter(Boolean).join(",");
   L(() => {
     var k;
     let g = !1;
-    const p = H ? H.split(",") : [];
+    const p = Y ? Y.split(",") : [];
     for (const I of p) {
-      if (b[I] !== void 0)
+      if (h[I] !== void 0)
         continue;
-      const [R, G] = I.split(":"), W = (k = $(R)) == null ? void 0 : k.type, se = Array.isArray(W) ? W[0] : W;
+      const [B, G] = I.split(":"), W = (k = $(B)) == null ? void 0 : k.type, se = Array.isArray(W) ? W[0] : W;
       typeof se == "string" && (async () => {
-        var je;
+        var Be;
         try {
-          const Be = await t.resolveModel(se), Ve = re(Be), ye = Ve ? await Be.get(G) : null, Re = (je = ye == null ? void 0 : ye[Ve]) == null ? void 0 : je.value;
-          !g && Re != null && v((pt) => ({ ...pt, [I]: String(Re) }));
+          const Re = await t.resolveModel(se), Pe = re(Re), ve = Pe ? await Re.get(G) : null, ze = (Be = ve == null ? void 0 : ve[Pe]) == null ? void 0 : Be.value;
+          !g && ze != null && v(($t) => ({ ...$t, [I]: String(ze) }));
         } catch {
         }
       })();
@@ -2953,7 +3014,7 @@ const ml = (e) => {
     return () => {
       g = !0;
     };
-  }, [H]);
+  }, [Y]);
   const le = (g) => {
     const p = n.current[g];
     if (!p)
@@ -2961,51 +3022,51 @@ const ml = (e) => {
     if (p.op === "contains")
       return `"${p.value}"`;
     const k = p.values ?? (p.value != null ? [p.value] : []);
-    return k.length === 0 ? "Set" : k.length === 1 ? b[`${g}:${k[0]}`] ?? "1 selected" : `${k.length} selected`;
-  }, mt = (g) => u((p) => p === g ? null : g), bt = () => {
+    return k.length === 0 ? "Set" : k.length === 1 ? h[`${g}:${k[0]}`] ?? "1 selected" : `${k.length} selected`;
+  }, Nt = (g) => d((p) => p === g ? null : g), wt = () => {
     var g, p;
-    u(null);
+    d(null);
     for (const k of Object.keys(n.current))
       delete n.current[k];
-    s(""), D(null), e.sort && o !== f && (a(f), (p = (g = e.sort).onChange) == null || p.call(g, f)), m((k) => k + 1);
+    s(""), D(null), e.sort && f !== u && (c(u), (p = (g = e.sort).onChange) == null || p.call(g, u)), m((k) => k + 1);
   }, he = (g, p) => {
-    u(null), p ? n.current[g] = JSON.parse(JSON.stringify(p)) : delete n.current[g], F();
-  }, yt = () => {
+    d(null), p ? n.current[g] = JSON.parse(JSON.stringify(p)) : delete n.current[g], F();
+  }, At = () => {
     var g, p;
-    u(null);
+    d(null);
     for (const k of Object.keys(n.current))
       delete n.current[k];
     for (const [k, I] of Object.entries(y))
       n.current[k] = JSON.parse(JSON.stringify(I));
-    s(""), F(), e.sort && o !== f && (a(f), (p = (g = e.sort).onChange) == null || p.call(g, f));
-  }, ie = [], vt = [...Object.keys(y), ...ne.filter((g) => !y[g])];
-  for (const g of vt) {
+    s(""), F(), e.sort && f !== u && (c(u), (p = (g = e.sort).onChange) == null || p.call(g, u));
+  }, ie = [], St = [...Object.keys(y), ...ne.filter((g) => !y[g])];
+  for (const g of St) {
     const p = n.current[g], k = y[g];
-    k && C(p, k) ? ie.push({ key: g, label: ((Ie = e.defaultLabels) == null ? void 0 : Ie[g]) ?? M(g), active: !0, toggle: () => he(g, null) }) : k && !p ? ie.push({ key: g, label: ((De = e.defaultLabels) == null ? void 0 : De[g]) ?? M(g), active: !1, toggle: () => he(g, k) }) : p && ie.push({ key: g, label: `${M(g)}: ${le(g)}`, active: !0, toggle: () => he(g, null) });
+    k && C(p, k) ? ie.push({ key: g, label: ((je = e.defaultLabels) == null ? void 0 : je[g]) ?? M(g), active: !0, toggle: () => he(g, null) }) : k && !p ? ie.push({ key: g, label: ((_e = e.defaultLabels) == null ? void 0 : _e[g]) ?? M(g), active: !1, toggle: () => he(g, k) }) : p && ie.push({ key: g, label: `${M(g)}: ${le(g)}`, active: !0, toggle: () => he(g, null) });
   }
-  i.trim() && _.length && ie.push({
+  i.trim() && j.length && ie.push({
     key: "~search",
-    label: `${_.map(M).join(", ")}: "${i.trim()}"`,
+    label: `${j.map(M).join(", ")}: "${i.trim()}"`,
     active: !0,
     toggle: () => s("")
   });
-  const { onPillsChange: me } = e;
+  const { onPillsChange: be } = e;
   if (L(() => {
-    !me || !l || me({ pills: ie, differs: E, reset: yt });
-  }, [me, l, h, b, i, o, E]), !l)
+    !be || !l || be({ pills: ie, differs: E, reset: At });
+  }, [be, l, b, h, i, f, E]), !l)
     return null;
-  const be = (g, p, k, I) => /* @__PURE__ */ w("div", { className: `bd-fmenu-row${d === g ? " open" : ""}`, children: [
-    /* @__PURE__ */ w("button", { type: "button", className: "bd-fmenu-head", "aria-expanded": d === g, onClick: () => mt(g), children: [
+  const ye = (g, p, k, I) => /* @__PURE__ */ A("div", { className: `bd-fmenu-row${o === g ? " open" : ""}`, children: [
+    /* @__PURE__ */ A("button", { type: "button", className: "bd-fmenu-head", "aria-expanded": o === g, onClick: () => Nt(g), children: [
       /* @__PURE__ */ r("span", { className: "bd-fmenu-label", children: p }),
       /* @__PURE__ */ r("span", { className: "bd-fmenu-value", children: k }),
       /* @__PURE__ */ r("span", { className: "bd-fmenu-chevron", children: "›" })
     ] }),
-    d === g ? /* @__PURE__ */ r("div", { className: "bd-fmenu-panel", children: I() }) : null
+    o === g ? /* @__PURE__ */ r("div", { className: "bd-fmenu-panel", children: I() }) : null
   ] }, g);
-  return /* @__PURE__ */ w("div", { className: "bd-fmenu", children: [
-    _.length > 0 ? be(
+  return /* @__PURE__ */ A("div", { className: "bd-fmenu", children: [
+    j.length > 0 ? ye(
       "search",
-      _.map(M).join(", "),
+      j.map(M).join(", "),
       i.trim() ? `"${i.trim()}"` : "All",
       () => /* @__PURE__ */ r(
         "input",
@@ -3014,31 +3075,31 @@ const ml = (e) => {
           type: "text",
           autoFocus: !0,
           value: i,
-          placeholder: e.searchPlaceholder ?? `Search ${_.map(M).join(", ")}...`,
+          placeholder: e.searchPlaceholder ?? `Search ${j.map(M).join(", ")}...`,
           onChange: (g) => s(g.target.value)
         }
       )
     ) : null,
-    ne.map((g) => be(
+    ne.map((g) => ye(
       g,
       M(g),
       le(g),
-      () => /* @__PURE__ */ r(Q, { port: K(g), mode: "filter" })
+      () => /* @__PURE__ */ r(Q, { port: z(g), mode: "filter" })
     )),
-    (xe = e.sort) != null && xe.options.length ? /* @__PURE__ */ w(Ue, { children: [
+    (Ue = e.sort) != null && Ue.options.length ? /* @__PURE__ */ A(Ke, { children: [
       /* @__PURE__ */ r("div", { className: "bd-fmenu-divider" }),
-      be(
+      ye(
         "sort",
         e.sort.label ?? "Sort",
-        ((_e = e.sort.options.find((g) => g.value === o)) == null ? void 0 : _e.label) ?? String(o),
-        () => /* @__PURE__ */ r(Ue, { children: e.sort.options.map((g) => /* @__PURE__ */ w(
+        ((Ve = e.sort.options.find((g) => g.value === f)) == null ? void 0 : Ve.label) ?? String(f),
+        () => /* @__PURE__ */ r(Ke, { children: e.sort.options.map((g) => /* @__PURE__ */ A(
           "button",
           {
             type: "button",
-            className: `bd-fmenu-option${g.value === o ? " checked" : ""}`,
+            className: `bd-fmenu-option${g.value === f ? " checked" : ""}`,
             onClick: () => {
               var p, k;
-              a(g.value), (k = (p = e.sort).onChange) == null || k.call(p, g.value), u(null);
+              c(g.value), (k = (p = e.sort).onChange) == null || k.call(p, g.value), d(null);
             },
             children: [
               /* @__PURE__ */ r("span", { children: g.label }),
@@ -3050,70 +3111,70 @@ const ml = (e) => {
       )
     ] }) : null,
     /* @__PURE__ */ r("div", { className: "bd-fmenu-divider" }),
-    /* @__PURE__ */ r("button", { type: "button", className: "bd-fmenu-head", onClick: bt, children: /* @__PURE__ */ r("span", { className: "bd-fmenu-label", children: e.clearLabel ?? "Clear filters" }) })
+    /* @__PURE__ */ r("button", { type: "button", className: "bd-fmenu-head", onClick: wt, children: /* @__PURE__ */ r("span", { className: "bd-fmenu-label", children: e.clearLabel ?? "Clear filters" }) })
   ] });
 };
-for (const e of Hn)
-  tt.register(e);
-const vl = "0.1.0";
+for (const e of cl)
+  rt.register(e);
+const Tl = "0.1.0";
 export {
-  gl as BDAddForm,
-  hl as BDEditor,
+  $l as BDAddForm,
+  kl as BDEditor,
   Q as BDField,
-  yl as BDFiltersMenu,
-  ml as BDList,
-  il as BDObjectView,
-  bl as BDSearchBox,
-  Hn as BUILTIN_TYPES,
-  fl as BlitzUIProvider,
-  Jt as ChipsControl,
+  El as BDFiltersMenu,
+  Ol as BDList,
+  bl as BDObjectView,
+  Ml as BDSearchBox,
+  cl as BUILTIN_TYPES,
+  Sl as BlitzUIProvider,
+  nn as ChipsControl,
   te as Picker,
-  _t as ReactUIManager,
+  Kt as ReactUIManager,
   P as SaveState,
-  vl as VERSION,
-  Rt as boolean,
-  pn as code,
-  Xe as compileConditions,
-  dn as currency,
-  Cn as date,
-  Nn as datetime,
-  Lt as draftPort,
-  un as duration,
-  gn as email,
-  $n as enumType,
-  Un as file,
-  In as fk,
-  cn as float,
-  Pt as hex,
-  qn as htmlText,
-  Rn as image,
-  rn as integer,
-  kt as isEmptyValue,
-  yn as json,
-  Tt as livePort,
-  Zn as location,
-  ot as makeDateControl,
-  at as makeNumberControl,
+  Tl as VERSION,
+  Ht as boolean,
+  On as code,
+  st as compileConditions,
+  vn as currency,
+  Mn as date,
+  En as datetime,
+  Pt as draftPort,
+  pn as duration,
+  Nn as email,
+  In as enumType,
+  Jn as file,
+  Rn as fk,
+  bn as float,
+  qt as hex,
+  rl as htmlText,
+  Hn as image,
+  hn as integer,
+  Ft as isEmptyValue,
+  $n as json,
+  Rt as livePort,
+  sl as location,
+  ht as makeDateControl,
+  ft as makeNumberControl,
   fe as makeTextAreaControl,
   oe as makeTextControl,
-  ke as makeUploadControl,
-  Ht as markdown,
-  Dn as mtm,
-  on as percentage,
-  Tn as phone,
-  Qe as queryPort,
-  qt as text,
-  an as texti18n,
-  tt as ui,
-  hn as url,
-  jt as useBDStatus,
-  B as useBDValue,
+  Ee as makeUploadControl,
+  sn as markdown,
+  Pn as mtm,
+  yn as percentage,
+  Un as phone,
+  it as queryPort,
+  ln as text,
+  mn as texti18n,
+  rt as ui,
+  wn as url,
+  Gt as useBDStatus,
+  U as useBDValue,
   ee as useDraftCommit,
-  sl as useSettledList,
-  J as useUIManager,
-  Bn as user,
-  Ut as varchar,
-  Yt as varcharMany,
-  Pn as video,
-  bn as youtube
+  yl as useSettledList,
+  H as useUIManager,
+  Wn as user,
+  Jt as varchar,
+  an as varcharMany,
+  qn as video,
+  Sn as youtube
 };
